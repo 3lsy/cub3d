@@ -146,14 +146,16 @@ There are only 6 possible characters in the lexic of the map:
 | **E** | Player’s start position facing *East*.|
 | **W** | Player’s start position facing *West*.|
 
-The map must be closed/surrounded by walls, if not, the program returns an error.
+- The map must be closed/surrounded by walls, if not, the program returns an error.
+- The map must be parsed as it looks in the file.
+- Spaces are a valid part of the map. 
 Here is a valid example of a simple map:
 ```
 111111
 100101
 101001
 1100N1
-111111
+ 11111
 ```
 </details>
 
