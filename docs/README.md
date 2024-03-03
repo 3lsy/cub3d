@@ -37,7 +37,7 @@ and Quake (Id Software, 1996), that are additional eternal milestones in the wor
   ```
 </details>
 
-## How to run cud3d ? 🕹️
+## How to run cub3d ? 🕹️
 
 ### Configuration files
 
@@ -47,6 +47,7 @@ There are 3 types of elements to be configured inside a configuration file:
 - [Map](#maps)
 
 Where the *map* element must always be the last element declared on the configuration file.
+
 The *wall textures* and the *floor and ceiling colors* configuration:
 - Can be set in any order.
 - Can be separated by one or more empty lines.
