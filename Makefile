@@ -1,4 +1,4 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,35 +6,45 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/08/04 01:40:13 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/05 14:57:58 by echavez-         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
-NAME        =                               # Name of the binary
+NAME		=   cub3d
 
 #****************** INC *******************#
 # General
-INC         =   ./include/                  # Project header files drectory
+INC			=   ./include/				# Project header files drectory
 
 # Libft
-LIB         =   ./libft/                    # Library to include
-LIB_H       =   ./libft/                    # Library header files directory
+LIB         =   ./lib/libft/			# Library to include
+LIB_H       =   ./lib/libft/			# Library header files directory
 
-INCLUDE     =   -O3 -I $(LIB_H) -I $(INC)   # Header files
+# Minilibx
+LIBMLX		=   ./lib/minilibx-linux/	# Library to include
+LIBMLX_H	=   ./lib/minilibx-linux/	# Library header files directory
 
-LIB_INC     =   -L$(LIB_H) -lft             # Include library
+INCLUDE		=   -O3 -I $(LIB_H) -I $(LIBMLX_H) -I $(INC)
+
+LIB_INC		=   -L$(LIB) -lft -L$(LIBMLX) -lmlx -lXext -lX11 -lm -lbsd
 
 #****************** SRC *******************#
 
 DIRSRC      =   ./src/
-DIRFOO      :=  #$(DIRSRC)/foo/
+# DIRFOO      :=  $(DIRSRC)analyzer/
+# DIRLOAD		:=	$(DIRSRC)load/
+# DIRGRAPHICS	:=	$(DIRSRC)graphics/
+# DIRGAME		:=	$(DIRSRC)game/
 
-DIRS        :=  $(DIRSRC) $(DIRFOO)
+DIRS        :=	$(DIRSRC) #$(DIRFOO) $(DIRLOAD) $(DIRGRAPHICS) $(DIRGAME)
 
-SRC         =   # main.c
-FOO         =
+SRC         =   main.c
+# FOO         =	analyzer.c map.c
+# LOAD		=	load.c set.c
+# GRAPHICS	=	graphics.c
+# GAME		=	game.c movement.c collect.c
 
-SRCS        :=  $(SRC) $(FOO)
+SRCS        :=  $(SRC) #$(FOO) $(LOAD) $(GRAPHICS) $(GAME)
 
 #***************** DEPS ******************#
 
@@ -56,7 +66,7 @@ ifdef FLAGS
 CFLAGS      =
     endif
     ifeq ($(FLAGS), debug)
-CFLAGS      =   -Wall -Wextra -Werror -ansi -pedantic -g
+CFLAGS      =   -Wall -Wextra -Werror -ansi -pedantic -g -fsanitize=address
     endif
 else
 CFLAGS      =   -Wall -Wextra -Werror
@@ -79,12 +89,15 @@ ECHO        =   $(ENV) echo -e
 MKDIR       =   $(ENV) mkdir -p
 GIT         =   $(ENV) git
 BOLD        =   "\e[1m"
+REVER       =   "\e[7m"
 BLINK       =   "\e[5m"
 RED         =   "\e[38;2;255;0;0m"
 GREEN       =   "\e[92m"
 BLUE        =   "\e[34m"
 YELLOW      =   "\e[33m"
 E0M         =   "\e[0m"
+
+FMT         :=  $(REVER)$(YELLOW)$(BLINK)
 
 #******************************* DEPS COMPILATION ********************************#
 
@@ -101,6 +114,29 @@ $(foreach dir,$(DIRS),$(eval $(call generate_objects,$(dir))))
 
 $(NAME)         :       ftlib $(OBJS)
 	                @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
+	                @$(ECHO)
+	                @$(ECHO) '                       '$(FMT)'██████'$(E0M)
+	                @$(ECHO) '                   '$(FMT)'████░░░░░░██'$(E0M)
+	                @$(ECHO) '                 '$(FMT)'██░░░░░░░░██'$(E0M)
+	                @$(ECHO) '               '$(FMT)'██░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '             '$(FMT)'██░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '   '$(FMT)'████████░░░░░░░░░░░░░░░░░░░░░░░░████████'$(E0M)
+	                @$(ECHO) ' '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) ' '$(FMT)'██▓▓░░░░░░░░░░░░  ██░░░░  ██░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '   '$(FMT)'██▓▓░░░░░░░░░░████░░░░████░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '     '$(FMT)'██▓▓░░░░░░░░████░░░░████░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░▓▓██░░░░██▓▓░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '         '$(FMT)'██░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░██'$(E0M)
+	                @$(ECHO) '         '$(FMT)'██▓▓░░▓▓████████████▓▓░░▓▓██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██▓▓██'$(E0M)'            '$(FMT)'██▓▓██'$(E0M)
+	                @$(ECHO) '             '$(FMT)'██'$(E0M)'                '$(FMT)'██'$(E0M)
+	                @$(ECHO) $(E0M)
 	                @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
 
 $(OBJS): | mkdepo
@@ -110,6 +146,7 @@ clean           :
 	                @($(RM) $(DEPS))
 	                @($(RM) $(DIROBJ))
 	                @(cd $(LIB) && $(MAKE) clean)
+					@(cd $(LIBMLX) && $(MAKE) clean)
 	                @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
 
 all             :       $(NAME)
@@ -117,20 +154,24 @@ all             :       $(NAME)
 fclean          :       clean
 	                @$(RM) $(NAME)
 	                @(cd $(LIB) && $(MAKE) fclean)
+					@(cd $(LIBMLX) && $(MAKE) fclean)
 	                @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
 
-re              :       fclean mkdepo all
+
+re              :  fclean mkdepo all
 
 mkdepo			:
 					@$(MKDIR) $(DIROBJ)
 
+
 ftlib           :
 	                @(cd $(LIB) && $(MAKE))
+					@(cd $(LIBMLX) && $(MAKE))
 
 init            :
 	                @$(GIT) submodule init
 	                @$(GIT) submodule update
 
-.PHONY          :       all clean re fclean ftlib mkdepo
+.PHONY          :       all clean re fclean ftlib
 
 -include $(DEPS)
