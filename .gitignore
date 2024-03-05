@@ -1,6 +1,9 @@
 ###Program name##
 cub3d
 
+mlx-test
+Makefile.gen
+
 ### C ###
 # Prerequisites
 *.d
