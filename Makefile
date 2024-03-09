@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/05 14:57:58 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/08 15:35:05 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,20 +31,20 @@ LIB_INC		=   -L$(LIB) -lft -L$(LIBMLX) -lmlx -lXext -lX11 -lm -lbsd
 #****************** SRC *******************#
 
 DIRSRC      =   ./src/
-# DIRFOO      :=  $(DIRSRC)analyzer/
-# DIRLOAD		:=	$(DIRSRC)load/
-# DIRGRAPHICS	:=	$(DIRSRC)graphics/
+# DIRCONFIG     :=  $(DIRSRC)config/
 # DIRGAME		:=	$(DIRSRC)game/
+# DIRRAYCASTING	:=	$(DIRSRC)raycasting/
+# DIRSTRUCTURES	:=	$(DIRSRC)structures/
 
-DIRS        :=	$(DIRSRC) #$(DIRFOO) $(DIRLOAD) $(DIRGRAPHICS) $(DIRGAME)
+DIRS        :=	$(DIRSRC) #$(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTURES)
 
 SRC         =   main.c
-# FOO         =	analyzer.c map.c
-# LOAD		=	load.c set.c
-# GRAPHICS	=	graphics.c
-# GAME		=	game.c movement.c collect.c
+# CONFIG    =	config.c
+# GAME		=	game.c
+# RAYCASTING=	raycasting.c
+# STRUCTURES=	structures.c
 
-SRCS        :=  $(SRC) #$(FOO) $(LOAD) $(GRAPHICS) $(GAME)
+SRCS        :=  $(SRC) #$(CONFIG) $(GAME) $(RAYCASTING) $(STRUCTURES)
 
 #***************** DEPS ******************#
 

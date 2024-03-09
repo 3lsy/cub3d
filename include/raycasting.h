@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 15:21:32 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 12:19:38 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/09 12:17:29 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/09 12:17:40 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef RAYCASTING_H
+# define RAYCASTING_H
 
-# include "config.h"
-# include "game.h"
-# include "raycasting.h"
+# include "libraries.h"
 
 #endif
