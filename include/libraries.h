@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 12:28:30 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:21:39 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@
 # include <math.h>     // math functions (-lm required during compilation)
 # include <mlx.h>      // MinilibX
 # include <mlx_int.h>  // MinilibX
+
+/*
+** Error messages
+*/
+
+# define USAGE "cub3d: Usage: ./cub3d <map.cub>\n"
+# define EPERIMETER "cub3d: Unclosed map perimeter\n"
+# define EFILE "cub3d: Couldn't open file\n"
+# define EELMAP "cub3d: Empty line in map\n"
 
 /*
 ** Keys
@@ -41,18 +50,11 @@
 # define E_MINIM 131073
 
 /*
-** Map
-** 1 := wall
-** 0 := empty space
+** Cube structure options
 */
 
-typedef struct s_map
-{
-	char		type;
-	int			x;
-	int			y;
-	t_bool		visited;
-}	t_map;
+# define DESTRUCTOR 0
+# define INIT 1
 
 /*
 **	Graphics
@@ -63,20 +65,20 @@ typedef struct s_graphics
 {
 	void	*mlx;
 	void	*win;
+	int		local_endian;
 	t_img	*texture_n;
 	t_img	*texture_s;
 	t_img	*texture_w;
 	t_img	*texture_e;
 	int		ceiling_color;
 	int		floor_color;
-	int		local_endian;
 }	t_graphics;
 
 /*
 ** Player
 */
 
-typedef struct player
+typedef struct s_player
 {
 	double	x;
 	double	y;
@@ -86,15 +88,32 @@ typedef struct player
 	double	rot_speed;
 }	t_player;
 
+/// @brief Linked list map
+typedef struct s_llmap
+{
+	char			*line;
+	struct s_llmap	*next;
+}	t_llmap;
+
+typedef struct s_map
+{
+	char	type;
+	int		x;
+	int		y;
+	int		visited;
+}	t_map;
+
 /*
 principal structure
 */
 
 typedef struct s_cub3d
 {
-	int			map_width;
-	int			map_height;
+	int			fd;
+	int			map_w;
+	int			map_h;
 	t_map		**map;
+	t_doubly	*llmap;
 	t_graphics	graphics;
 }	t_cub3d;
 

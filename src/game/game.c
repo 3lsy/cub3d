@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 18:43:26 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/09 18:42:57 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/09 19:29:07 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "cub3d.h"
 
-# include "libraries.h"
-
-void	game(t_cub3d *world);
-
-#endif
+void	game(t_cub3d *world)
+{
+	(void)world;
+	ft_printf("Game started\n");
+}

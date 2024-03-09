@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   destructors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 18:43:26 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/09 13:40:22 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/09 18:51:35 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "cub3d.h"
 
-# include "libraries.h"
+// [Not implemented] - map_destructor
+void	ft_destructor(t_cub3d *world)
+{
+	if (world->fd != -1)
+		close(world->fd);
+	map_destructor(world);
+	graphic_destructor(&world->graphics);
+}
 
-void	game(t_cub3d *world);
-
-#endif
+static __attribute__((destructor)) void	destructor(void)
+{
+	ft_get_next_line(FREE_BUFFER);
+	cub(DESTRUCTOR);
+}

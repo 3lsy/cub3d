@@ -1,0 +1,16 @@
+NO ../../textures/north_wall/mario_cube.xpm
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+
+F 220,100,0
+C 225,30,0
+
+11111111 11111 111
+     10111000111001
+11111001 110111111
+101  11    1N01 
+ 1         1001
+111111111111111
+
+

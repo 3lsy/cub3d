@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   map_destructor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 18:43:26 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/09 16:20:17 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/09 18:52:52 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "cub3d.h"
 
-# include "libraries.h"
+void	map_destructor(t_cub3d *world)
+{
+	int		i;
 
-void	game(t_cub3d *world);
-
-#endif
+	if (world->map)
+	{
+		i = 0;
+		while (i < world->map_h)
+			free(world->map[i++]);
+	}
+	if (world->llmap)
+		ft_deldoubly(&world->llmap);
+}

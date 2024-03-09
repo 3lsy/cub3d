@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/08 15:35:05 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/09 19:25:28 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,20 +31,20 @@ LIB_INC		=   -L$(LIB) -lft -L$(LIBMLX) -lmlx -lXext -lX11 -lm -lbsd
 #****************** SRC *******************#
 
 DIRSRC      =   ./src/
-# DIRCONFIG     :=  $(DIRSRC)config/
-# DIRGAME		:=	$(DIRSRC)game/
-# DIRRAYCASTING	:=	$(DIRSRC)raycasting/
-# DIRSTRUCTURES	:=	$(DIRSRC)structures/
+DIRCONFIG       :=  $(DIRSRC)config/
+DIRGAME         :=  $(DIRSRC)game/
+DIRRAYCASTING   :=  $(DIRSRC)raycasting/
+DIRSTRUCTURES   :=  $(DIRSRC)structures/
 
-DIRS        :=	$(DIRSRC) #$(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTURES)
+DIRS        :=  $(DIRSRC) $(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTURES)
 
 SRC         =   main.c
-# CONFIG    =	config.c
-# GAME		=	game.c
-# RAYCASTING=	raycasting.c
-# STRUCTURES=	structures.c
+CONFIG      =   check_map.c
+GAME        =   game.c
+RAYCASTING  =   #raycasting.c
+STRUCTURES  =   cub3d.c destructors.c graphic_destructor.c map_destructor.c llmap.c
 
-SRCS        :=  $(SRC) #$(CONFIG) $(GAME) $(RAYCASTING) $(STRUCTURES)
+SRCS        :=  $(SRC) $(CONFIG) $(GAME) $(RAYCASTING) $(STRUCTURES)
 
 #***************** DEPS ******************#
 
