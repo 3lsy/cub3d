@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 21:40:48 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/11 00:44:17 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	game(t_cub3d *world);
 
 int		local_endian(void);
 t_img	*new_img(void *mlx, int w, int h, int **bmp);
+void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp);
 int		**bmp_square(int w, int h, int color);
 void	render(t_cub3d *world);
 void	paint_mmap(t_cub3d *world);

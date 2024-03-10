@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:36:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 01:18:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/11 00:44:17 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_color_ptr(unsigned char *line, t_img *i,
 	}
 }
 
-static void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp)
+void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp)
 {
 	int				x;
 	int				y;

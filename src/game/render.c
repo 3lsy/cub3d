@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:12:47 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 22:11:24 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/11 00:55:12 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ void	update_mmap(int ***bmp, t_pair m, t_player player, t_cub3d *world)
 
 void	paint_mmap(t_cub3d *world)
 {
-	if (world->graphics.mmap)
-		mlx_destroy_image(world->graphics.mlx, world->graphics.mmap);
-	world->graphics.mmap = new_img(world->graphics.mlx, world->graphics.mmap_w,
-			world->graphics.mmap_h, world->graphics.bmp);
+	if (!world->graphics.mmap)
+		world->graphics.mmap = new_img(world->graphics.mlx,
+				world->graphics.mmap_w, world->graphics.mmap_h,
+				world->graphics.bmp);
+	else
+		bmp_to_img(world->graphics.mlx, world->graphics.mmap, (t_pair){
+			world->graphics.mmap_w, world->graphics.mmap_h},
+			world->graphics.bmp);
 	mlx_put_image_to_window(world->graphics.mlx, world->graphics.win,
 		world->graphics.mmap, 0, 0);
 }
