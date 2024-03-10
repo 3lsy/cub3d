@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 00:33:07 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:37:34 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 ** Minimap sprite size
 */
 
-# define MMAP_H 10
-# define MMAP_W 10
+# define MMAP_H 30
+# define MMAP_W 30
+# define MMAP_FLOOR 0xDDDDDD
+# define MMAP_WALL 0x222222
 
 /*
 ** Error messages
@@ -61,9 +63,6 @@
 # define R_ARROW 65363
 
 # define ESC 65307
-# define E_CLOSE 131072
-# define E_MAXIM 131072
-# define E_MINIM 131073
 
 /*
 ** Cube structure options
@@ -91,8 +90,7 @@ typedef struct s_graphics
 	t_img	*texture_e;
 	int		ceiling_color;
 	int		floor_color;
-	t_img	*mmap_floor;
-	t_img	*mmap_wall;
+	t_img	*mmap;
 }	t_graphics;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 01:00:48 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 10:14:14 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		**bmp_square(int w, int h, int color);
 
 int		exit_game(void *param);
 int		empty_hook(void *p);
+int		key_press(int keycode, void *p);
 
 #endif

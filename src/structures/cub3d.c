@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:31:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 22:23:41 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:12:25 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ t_cub3d	*cub(int action)
 	},
 		.graphics = {
 		.mlx = NULL, .win = NULL, .texture_n = NULL, .texture_s = NULL,
-		.texture_w = NULL, .texture_e = NULL,
+		.texture_w = NULL, .texture_e = NULL, .mmap = NULL,
 		.local_endian = -1, .ceiling_color = -1, .floor_color = -1,
 	}
 	};
 
 	if (action == DESTRUCTOR)
 		ft_destructor(&x);
-	return (&x);
+	if (action == INIT)
+		return (&x);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:44:03 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 00:38:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:13:38 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	graphic_destructor(t_graphics *graphics)
 		mlx_destroy_image(graphics->mlx, graphics->texture_w);
 	if (graphics->texture_e)
 		mlx_destroy_image(graphics->mlx, graphics->texture_e);
-	if (graphics->mmap_floor)
-		mlx_destroy_image(graphics->mlx, graphics->mmap_floor);
-	if (graphics->mmap_wall)
-		mlx_destroy_image(graphics->mlx, graphics->mmap_wall);
+	if (graphics->mmap)
+		mlx_destroy_image(graphics->mlx, graphics->mmap);
 	if (graphics->win)
 	{
 		mlx_clear_window(graphics->mlx, graphics->win);

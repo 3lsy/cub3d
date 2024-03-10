@@ -6,18 +6,19 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:34:01 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 00:34:41 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:23:56 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_bmp(int **bmp, int h)
+void	free_bmp(int ***bmp, int h)
 {
 	int	i;
 
 	i = 0;
 	while (i < h)
-		free(bmp[i++]);
-	free(bmp);
+		free((*bmp)[i++]);
+	free(*bmp);
+	*bmp = NULL;
 }
