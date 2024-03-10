@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 19:21:39 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 00:33:07 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@
 # include <mlx_int.h>  // MinilibX
 
 /*
+** Window size
+*/
+# define W_HEIGHT 720
+# define W_WIDTH 1280
+
+/*
+** Minimap sprite size
+*/
+
+# define MMAP_H 10
+# define MMAP_W 10
+
+/*
 ** Error messages
 */
 
@@ -31,6 +44,9 @@
 # define EPERIMETER "cub3d: Unclosed map perimeter\n"
 # define EFILE "cub3d: Couldn't open file\n"
 # define EELMAP "cub3d: Empty line in map\n"
+# define EMLX "cub3d: Minilibx init error\n"
+# define EWIN "cub3d: Minilibx window error\n"
+# define EIMG "cub3d: Minilibx image error\n"
 
 /*
 ** Keys
@@ -59,6 +75,9 @@
 /*
 **	Graphics
 **  win := windows
+**  mlx := minilibx
+**  local_endian := endianess
+**  mmap := minimap
 */
 
 typedef struct s_graphics
@@ -72,16 +91,22 @@ typedef struct s_graphics
 	t_img	*texture_e;
 	int		ceiling_color;
 	int		floor_color;
+	t_img	*mmap_floor;
+	t_img	*mmap_wall;
 }	t_graphics;
 
 /*
 ** Player
+** x, y := player position
+** mx, my := minimap position
 */
 
 typedef struct s_player
 {
 	double	x;
 	double	y;
+	double	mx;
+	double	my;
 	double	dir_x;
 	double	dir_y;
 	double	move_speed;
@@ -112,6 +137,7 @@ typedef struct s_cub3d
 	int			fd;
 	int			map_w;
 	int			map_h;
+	t_player	player;
 	t_map		**map;
 	t_doubly	*llmap;
 	t_graphics	graphics;

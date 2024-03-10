@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:20:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 18:52:52 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 00:33:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	map_destructor(t_cub3d *world)
 		i = 0;
 		while (i < world->map_h)
 			free(world->map[i++]);
+		free(world->map);
 	}
 	if (world->llmap)
 		ft_deldoubly(&world->llmap);

@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/09 19:25:28 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/10 00:44:02 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ DIRS        :=  $(DIRSRC) $(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTUR
 
 SRC         =   main.c
 CONFIG      =   check_map.c
-GAME        =   game.c
+GAME        =   game.c image.c hooks.c
 RAYCASTING  =   #raycasting.c
-STRUCTURES  =   cub3d.c destructors.c graphic_destructor.c map_destructor.c llmap.c
+STRUCTURES  =   cub3d.c destructors.c graphic_destructor.c map_destructor.c llmap.c map.c
 
 SRCS        :=  $(SRC) $(CONFIG) $(GAME) $(RAYCASTING) $(STRUCTURES)
 

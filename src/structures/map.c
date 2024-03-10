@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:17:09 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 01:00:48 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/10 00:34:01 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/10 00:34:41 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "cub3d.h"
 
-# include "libraries.h"
+void	free_bmp(int **bmp, int h)
+{
+	int	i;
 
-void	game(t_cub3d *world);
-
-/*
-** Img
-*/
-
-int		local_endian(void);
-t_img	*new_img(void *mlx, int w, int h, int **bmp);
-int		**bmp_square(int w, int h, int color);
-
-/*
-** Hooks
-*/
-
-int		exit_game(void *param);
-int		empty_hook(void *p);
-
-#endif
+	i = 0;
+	while (i < h)
+		free(bmp[i++]);
+	free(bmp);
+}

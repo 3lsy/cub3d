@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:21:32 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 18:54:19 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 00:36:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_cub3d	*cub(int action);
 void	ft_destructor(t_cub3d *world);
 void	graphic_destructor(t_graphics *graphics);
 void	map_destructor(t_cub3d *world);
+void	free_bmp(int **bmp, int h);
 
 #endif
