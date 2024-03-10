@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:42:13 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 12:10:44 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:44:40 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,27 @@ int	exit_game(void *p _X_UNUSED)
 	exit(EXIT_SUCCESS);
 }
 
-int	empty_hook(void *p _X_UNUSED)
+int	event_render(void *p)
 {
+	paint_mmap(p);
 	return (0);
 }
 
-int	key_press(int keycode, void *p _X_UNUSED)
+int	key_press(int keycode, void *p)
 {
 	if (keycode == W)
-		ft_printf("Move forward\n");
+		move_up(p);
 	else if (keycode == A)
-		ft_printf("Move left\n");
+		move_left(p);
 	else if (keycode == S)
-		ft_printf("Move back\n");
+		move_down(p);
 	else if (keycode == D)
-		ft_printf("Move right\n");
+		move_right(p);
 	else if (keycode == L_ARROW)
-		ft_printf("Turn left\n");
+		turn_left(p);
 	else if (keycode == R_ARROW)
-		ft_printf("Turn right\n");
-	else if (keycode == ESC)
+		turn_right(p);
+	if (keycode == ESC)
 		exit(EXIT_SUCCESS);
 	return (0);
 }

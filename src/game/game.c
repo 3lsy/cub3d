@@ -6,20 +6,11 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:42:57 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 12:30:33 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:15:17 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	init_window(t_cub3d *world)
-{
-	world->graphics.win = mlx_new_window(world->graphics.mlx,
-			W_WIDTH, W_HEIGHT, "cub3D");
-	if (!world->graphics.win)
-		exit_error(EWIN);
-
-}
 
 /*
 ** x_event: path: /usr/include/X11/X.h
@@ -38,10 +29,21 @@ static void	init_hooks(t_cub3d *world)
 	mlx_hook(world->graphics.win,
 		DestroyNotify, StructureNotifyMask, exit_game, world);
 	mlx_hook(world->graphics.win, ConfigureNotify, StructureNotifyMask,
-		empty_hook, world);
+		event_render, world);
 	mlx_hook(world->graphics.win, UnmapNotify, StructureNotifyMask,
-		empty_hook, world);
-	mlx_key_hook(world->graphics.win, key_press, world);
+		event_render, world);
+	// mlx_key_hook(world->graphics.win, key_press, world);
+	mlx_hook(world->graphics.win,
+		KeyPress, KeyPressMask, key_press, world);
+}
+
+static void	init_window(t_cub3d *world)
+{
+	world->graphics.win = mlx_new_window(world->graphics.mlx,
+			W_WIDTH, W_HEIGHT, "cub3D");
+	if (!world->graphics.win)
+		exit_error(EWIN);
+
 }
 
 static void	init_graphics(t_cub3d *world)
@@ -51,16 +53,13 @@ static void	init_graphics(t_cub3d *world)
 	if (!world->graphics.mlx)
 		exit_error(EMLX);
 	init_window(world);
-	init_hooks(world);
-
-	new_mmap(&world->graphics, world);
-	mlx_put_image_to_window(world->graphics.mlx, world->graphics.win,
-		world->graphics.mmap, 0, 0);
+	new_bmp(&world->graphics, world);
 }
 
 void	game(t_cub3d *world)
 {
 	init_graphics(world);
-	ft_printf("Game started\n");
+	init_hooks(world);
+	render(world);
 	mlx_loop(world->graphics.mlx);
 }

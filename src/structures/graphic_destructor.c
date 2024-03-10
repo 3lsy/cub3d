@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:44:03 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 12:13:38 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:19:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ void	graphic_destructor(t_graphics *graphics)
 		mlx_destroy_display(graphics->mlx);
 		free(graphics->mlx);
 	}
+	if (graphics->bmp)
+		free_bmp(&graphics->bmp, graphics->mmap_h);
 }

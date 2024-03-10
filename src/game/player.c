@@ -1,24 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 15:21:32 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 14:40:29 by echavez-         ###   ########.fr       */
+/*   Created: 2024/03/10 14:43:34 by echavez-          #+#    #+#             */
+/*   Updated: 2024/03/10 15:21:41 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3d.h"
 
-# include "config.h"
-# include "game.h"
-# include "raycasting.h"
-# include "structures.h"
-
-void	exit_error(char *message);
-t_cub3d	*cub(int action);
-
-#endif

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 13:37:34 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/11 00:27:56 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@
 ** Minimap sprite size
 */
 
-# define MMAP_H 30
-# define MMAP_W 30
+# define MMAP_SCALE 30
 # define MMAP_FLOOR 0xDDDDDD
 # define MMAP_WALL 0x222222
+// Scale percentage
+# define PLAYER_SIZE 0.5
+# define PLAYER_COLOR 0xff8da1
+// Arrow thickness in pixels
+# define A_WIDTH 2
+# define A_COLOR 0x000000
+
+# define TURN_SPEED 0.1
+# define MOVE_SPEED 2
 
 /*
 ** Error messages
@@ -65,11 +73,13 @@
 # define ESC 65307
 
 /*
-** Cube structure options
+** Structure options
 */
 
 # define DESTRUCTOR 0
 # define INIT 1
+# define FLOOR 1
+# define PLAYER 2
 
 /*
 **	Graphics
@@ -90,7 +100,10 @@ typedef struct s_graphics
 	t_img	*texture_e;
 	int		ceiling_color;
 	int		floor_color;
+	int		mmap_w;
+	int		mmap_h;
 	t_img	*mmap;
+	int		**bmp;
 }	t_graphics;
 
 /*
@@ -105,10 +118,10 @@ typedef struct s_player
 	double	y;
 	double	mx;
 	double	my;
-	double	dir_x;
-	double	dir_y;
+	double	angle;
 	double	move_speed;
-	double	rot_speed;
+	double	turn_speed;
+	double	size;
 }	t_player;
 
 /// @brief Linked list map
@@ -135,9 +148,9 @@ typedef struct s_cub3d
 	int			fd;
 	int			map_w;
 	int			map_h;
-	t_player	player;
 	t_map		**map;
 	t_doubly	*llmap;
+	t_player	player;
 	t_graphics	graphics;
 }	t_cub3d;
 
