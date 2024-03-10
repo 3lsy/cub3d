@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:36:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 00:31:35 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/10 01:18:10 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_color_ptr(unsigned char *line, t_img *i,
 	}
 }
 
-static void	fill_img(void *mlx, t_img *i, t_pair wh, int **bmp)
+static void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp)
 {
 	int				x;
 	int				y;
@@ -80,7 +80,7 @@ t_img	*new_img(void *mlx, int w, int h, int **bmp)
 	new = mlx_new_image(mlx, w, h);
 	if (!new)
 		exit_error(EIMG);
-	fill_img(mlx, new, (t_pair){w, h}, bmp);
+	bmp_to_img(mlx, new, (t_pair){w, h}, bmp);
 	return (new);
 }
 
