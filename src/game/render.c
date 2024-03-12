@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:12:47 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 00:55:12 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:51:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	update_mmap(int ***bmp, t_pair m, t_player player, t_cub3d *world)
 			else if (world->map[m.y / MMAP_SCALE][m.x / MMAP_SCALE].type == '0')
 				(*bmp)[m.y][m.x] = MMAP_FLOOR;
 			if (is_arrow(player, m.x, m.y))
-				(*bmp)[m.y][m.x] = A_COLOR;
+				(*bmp)[m.y][m.x] = ARROW_COLOR;
 		}
 	}
 }

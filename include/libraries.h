@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 00:27:56 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:55:32 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@
 # define PLAYER_SIZE 0.5
 # define PLAYER_COLOR 0xff8da1
 // Arrow thickness in pixels
-# define A_WIDTH 2
-# define A_COLOR 0x000000
+# define ARROW_W 2
+# define ARROW_LEN 15
+# define ARROW_COLOR 0x000000
 
 # define TURN_SPEED 0.1
 # define MOVE_SPEED 2
@@ -121,7 +122,7 @@ typedef struct s_player
 	double	angle;
 	double	move_speed;
 	double	turn_speed;
-	double	size;
+	double	diameter;
 }	t_player;
 
 /// @brief Linked list map
