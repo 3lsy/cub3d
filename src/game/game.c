@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:42:57 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 23:15:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:39:59 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	init_window(t_cub3d *world)
 			W_WIDTH, W_HEIGHT, "cub3D");
 	if (!world->graphics.win)
 		exit_error(EWIN);
-
 }
 
 static void	init_graphics(t_cub3d *world)
