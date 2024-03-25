@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:20:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 15:06:56 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:22:10 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		world = cub(INIT);
+		world->graphics.mlx = mlx_init();
+		if (!world->graphics.mlx)
+			exit_error(EMLX);
 		if (load_config(av[1], world) == EXIT_SUCCESS)
 			game(world);
 	}
