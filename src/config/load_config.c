@@ -20,16 +20,17 @@ int	load_config(char *file, t_cub3d *world)
 {
 	// Verify ".cub" extension
 	parse_config(file, world);
-	translate_map(world);
-	if (valid_perimeter(world->map) == EXIT_FAILURE)
-		exit_error(EPERIMETER);
+	//translate_map(world);
+	//if (valid_perimeter(world->map) == EXIT_FAILURE)
+	//	exit_error(EPERIMETER);
 	return (EXIT_SUCCESS);
 }
 
 // unknown key, double keys, an invalid path,
 // invalid color, invalid map, invalid texture
-int	parse_element(char **element, t_cub3d *word)
+void	parse_element(char **element, t_cub3d *word)
 {
+	int	count;
 	// Check if the first element is:
 	// NO, SO, WE, EA, F, C
 	// Check if the texture is valid
@@ -37,9 +38,81 @@ int	parse_element(char **element, t_cub3d *word)
 	// word->graphics.ceiling_color = ft_rgb_to_int(r, g, b);
 	// On error, call ft_free_split(element) and exit_error();
 	// On success, save the element in the structure
+	count = 0;
+	if (element[2])
+		exit_error(EINFO);
+	check_identifier(element, word);
 }
 
-int	parse_map(char *line, t_cub3d *world)
+void	check_identifier(char **element, t_cub3d *word)
+{
+	int		width;
+	int		height;
+
+	if (ft_strcmp(element[0], "NO") == 0)
+	{
+		ft_printf("%s", "NO\n");
+		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
+		{
+			ft_printf("%s", "1\n");
+			ft_free_split(&element);
+			exit_error(EXPM);
+		}
+		ft_printf("%s\n", element[1]);
+		ft_printf("%p\n", word->graphics.mlx);
+		word->graphics.texture_n = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
+		if (!word->graphics.texture_n)
+		{
+			ft_printf("%s", "2\n");
+			ft_free_split(&element);
+			exit_error(EIMG);
+		}
+	}
+	else if (ft_strcmp(element[0], "SO") == 0)
+	{
+		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0 || access(element[1], F_OK) == -1)
+		{
+			ft_free_split(&element);
+			exit_error(EXPM);
+		}
+		word->graphics.texture_s = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
+		if (!word->graphics.texture_n)
+		{
+			ft_free_split(&element);
+			exit_error(EIMG);
+		}
+	}
+	else if (ft_strcmp(element[0], "WE") == 0)
+	{
+		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0 || access(element[1], F_OK) == -1)
+		{
+			ft_free_split(&element);
+			exit_error(EXPM);
+		}
+		word->graphics.texture_w = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
+		if (!word->graphics.texture_n)
+		{
+			ft_free_split(&element);
+			exit_error(EIMG);
+		}
+	}
+	else if (ft_strcmp(element[0], "EA") == 0)
+	{
+		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0 || access(element[1], F_OK) == -1)
+		{
+			ft_free_split(&element);
+			exit_error(EXPM);
+		}
+		word->graphics.texture_e = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
+		if (!word->graphics.texture_n)
+		{
+			ft_free_split(&element);
+			exit_error(EIMG);
+		}
+	}
+}
+
+/*int	parse_map(char *line, t_cub3d *world)
 {
 	int	size;
 
@@ -53,14 +126,40 @@ int	parse_map(char *line, t_cub3d *world)
 	// On success, save the line in the map
 	llmap_append(line, world);
 	world->map_h++;
-}
+}*/
 
 void	check_map_started(char *line, t_cub3d *world)
 {
+	int	i;
 	if (world->map_h)
 		return ;
 	// Check if the line is the start of the map
 	// If it is, world->map_h++;
+	i = 0;
+	if (!check_empty_line(line))
+	{
+		while (line[i])
+		{
+			if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+				break ;
+			i++;
+		}
+		if (i == (int)ft_strlen(line))
+			world->map_h++;
+	}
+}
+
+int	check_empty_line(char *line)
+{
+	int i;
+	i = 0;
+	while (line[0])
+	{
+		if (!ft_isspace(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 /*
@@ -78,10 +177,10 @@ void	analyze_line(char *line, t_cub3d *world)
 	{
 		element = ft_split(line, ' ');
 		parse_element(element, world);
-		ft_free_split(element);
+		ft_free_split(&element);
 	}
-	else
-		parse_map(line, world);
+	//else
+		//parse_map(line, world);
 }
 
 /*
@@ -106,6 +205,7 @@ void	parse_config(char *file, t_cub3d *world)
 		exit_error(strerror(errno));
 	while (line)
 	{
+		printf("1");
 		analyze_line(line, world);
 		line = ft_get_next_line(world->fd);
 		if (!line)

@@ -58,6 +58,8 @@
 # define EMLX "cub3d: Minilibx init error\n"
 # define EWIN "cub3d: Minilibx window error\n"
 # define EIMG "cub3d: Minilibx image error\n"
+# define EINFO "cub3d: Too much information for one element\n"
+# define EXPM "cub3d: Invalid path for xpm file\n"
 
 /*
 ** Keys

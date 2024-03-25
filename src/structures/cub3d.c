@@ -25,7 +25,7 @@ t_cub3d	*cub(int action)
 		.mlx = NULL, .win = NULL, .texture_n = NULL, .texture_s = NULL,
 		.texture_w = NULL, .texture_e = NULL, .mmap = NULL, .bmp = NULL,
 		.local_endian = -1, .ceiling_color = -1, .floor_color = -1,
-		.mmap_w = -1, .mmap_h = -1,
+		.mmap_w = -1, .mmap_h = -1, 
 	}
 	};
 

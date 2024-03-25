@@ -15,7 +15,7 @@
 // Remove when config is implemented
 // Set to 0 if developing config
 /// @brief Output of config section
-#if 1
+#if 0
 
 // world->graphics.texture_n = load_img();
 // ...

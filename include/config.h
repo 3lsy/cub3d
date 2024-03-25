@@ -16,5 +16,10 @@
 # include "libraries.h"
 
 void	translate_map(char **map, t_cub3d *world);
+int	    load_config(char *file, t_cub3d *world);
+void	parse_config(char *file, t_cub3d *world);
+void	check_identifier(char **element, t_cub3d *word);
+int	check_empty_line(char *line);
+void	check_map_started(char *line, t_cub3d *world);
 
 #endif
