@@ -49,6 +49,7 @@ void	check_identifier(char **element, t_cub3d *word)
 {
 	int		width;
 	int		height;
+	char	**rgb;
 	struct stat path_stat;
 
 	if (ft_strcmp(element[0], "NO") == 0)
@@ -165,6 +166,65 @@ void	check_identifier(char **element, t_cub3d *word)
 			ft_free_split(&element);
 			exit_error(EIMG);
 		}
+	}
+	else if (ft_strcmp(element[0], "C") == 0)
+	{
+		ft_printf("%s", "C\n");
+		if (word->graphics.ceiling_color != -1)
+		{
+			ft_free_split(&element);
+			exit_error(EDUP);
+		}
+		if (element[1])
+		{
+			rgb = ft_split(element[1], ',');
+			if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255 \
+				|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255 \
+					|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
+			{
+				ft_free_split(&rgb);
+				ft_free_split(&element);
+				exit_error(ECOLOR);
+			}
+			word->graphics.ceiling_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+		}
+		else
+		{
+			ft_free_split(&element);
+			exit_error(ECOLOR);
+		}
+	}
+	else if (ft_strcmp(element[0], "F") == 0)
+	{
+		ft_printf("%s", "F\n");
+		if (word->graphics.floor_color != -1)
+		{
+			ft_free_split(&element);
+			exit_error(EDUP);
+		}
+		if (element[1])
+		{
+			rgb = ft_split(element[1], ',');
+			if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255 \
+				|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255 \
+					|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
+			{
+				ft_free_split(&rgb);
+				ft_free_split(&element);
+				exit_error(ECOLOR);
+			}
+			word->graphics.floor_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+		}
+		else
+		{
+			ft_free_split(&element);
+			exit_error(ECOLOR);
+		}
+	}
+	else
+	{
+		ft_free_split(&element);
+		exit_error(EUNKNOWN);
 	}
 }
 

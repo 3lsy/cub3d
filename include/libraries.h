@@ -63,6 +63,8 @@
 # define EPATH "cub3d: Invalid path for xpm file\n"
 # define EDUP "cub3d: Duplicate identifier detected\n"
 # define EEXP "cub3d: Invalid texture file extention\n"
+# define ECOLOR "cub3d: Invalid RGB color\n"
+# define EUNKNOWN "cub3d: Unkown element detected\n"
 
 /*
 ** Keys

@@ -2,3 +2,8 @@ NO ./textures/north_wall/mario_cube.xpm
 
 
 SO ./textures/north_wall/mario_cube.xpm
+WE ./textures/north_wall/mario_cube.xpm
+EA ./textures/north_wall/mario_cube.xpm
+
+F 220,100,0
+C 225,30,0
