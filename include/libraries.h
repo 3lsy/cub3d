@@ -22,6 +22,7 @@
 # include <math.h>     // math functions (-lm required during compilation)
 # include <mlx.h>      // MinilibX
 # include <mlx_int.h>  // MinilibX
+# include <sys/stat.h> // stat, S_ISREG
 
 /*
 ** Window size
@@ -59,7 +60,9 @@
 # define EWIN "cub3d: Minilibx window error\n"
 # define EIMG "cub3d: Minilibx image error\n"
 # define EINFO "cub3d: Too much information for one element\n"
-# define EXPM "cub3d: Invalid path for xpm file\n"
+# define EPATH "cub3d: Invalid path for xpm file\n"
+# define EDUP "cub3d: Duplicate identifier detected\n"
+# define EEXP "cub3d: Invalid texture file extention\n"
 
 /*
 ** Keys

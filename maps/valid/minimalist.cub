@@ -1,7 +1,7 @@
-NO ../../textures/north_wall/mario_cube.xpm
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/north_wall/mario_cube.xpm
+SO ./textures/north_wall/mario_cube.xpm
+WE ./textures/north_wall/mario_cube.xpm
+EA ./textures/north_wall/mario_cube.xpm
 
 F 220,100,0
 C 225,30,0

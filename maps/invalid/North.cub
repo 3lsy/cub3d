@@ -1,1 +1,4 @@
-NO ./textures/mario_cube.xpm
+NO ./textures/north_wall/mario_cube.xpm
+
+
+SO ./textures/north_wall/mario_cube.xpm
