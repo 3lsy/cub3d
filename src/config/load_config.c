@@ -20,7 +20,7 @@ int	load_config(char *file, t_cub3d *world)
 {
 	// Verify ".cub" extension
 	parse_config(file, world);
-	//translate_map(world);
+	//translate_map(world->llmap, world);
 	//if (valid_perimeter(world->map) == EXIT_FAILURE)
 	//	exit_error(EPERIMETER);
 	return (EXIT_SUCCESS);
@@ -41,196 +41,25 @@ void	parse_element(char **element, t_cub3d *word)
 	{
 		if (element[2])
 			exit_error(EINFO);
-		check_identifier(element, word);
-	}
-}
-
-void	check_identifier(char **element, t_cub3d *word)
-{
-	int		width;
-	int		height;
-	char	**rgb;
-	struct stat path_stat;
-
-	if (ft_strcmp(element[0], "NO") == 0)
-	{
-		ft_printf("%s", "NO\n");
-		if (word->graphics.texture_n)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (stat(element[1], &path_stat) != 0 || !S_ISREG(path_stat.st_mode)) 
-		{
-			ft_free_split(&element);
-            exit_error(EPATH);
-        }
-		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
-		{
-			ft_free_split(&element);
-			exit_error(EEXP);
-		}
-		word->graphics.texture_n = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
-		//ft_printf("w:%d\n", width);
-		//ft_printf("h:%d\n", height);
-		if (!word->graphics.texture_n)
-		{
-			ft_printf("%s", "2\n");
-			ft_free_split(&element);
-			exit_error(EIMG);
-		}
-	}
-	else if (ft_strcmp(element[0], "SO") == 0)
-	{
-		ft_printf("%s", "SO\n");
-		if (word->graphics.texture_s)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (stat(element[1], &path_stat) != 0 || !S_ISREG(path_stat.st_mode)) 
-		{
-			ft_free_split(&element);
-            exit_error(EPATH);
-        }
-		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
-		{
-			ft_printf("%s", "1\n");
-			ft_free_split(&element);
-			exit_error(EEXP);
-		}
-		word->graphics.texture_s = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
-		//ft_printf("w:%d\n", width);
-		//ft_printf("h:%d\n", height);
-		if (!word->graphics.texture_s)
-		{
-			ft_printf("%s", "2\n");
-			ft_free_split(&element);
-			exit_error(EIMG);
-		}
-	}
-	else if (ft_strcmp(element[0], "WE") == 0)
-	{
-		ft_printf("%s", "WE\n");
-		if (word->graphics.texture_w)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (stat(element[1], &path_stat) != 0 || !S_ISREG(path_stat.st_mode)) 
-		{
-			ft_free_split(&element);
-            exit_error(EPATH);
-        }
-		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
-		{
-			ft_printf("%s", "1\n");
-			ft_free_split(&element);
-			exit_error(EEXP);
-		}
-		word->graphics.texture_w = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
-		//ft_printf("w:%d\n", width);
-		//ft_printf("h:%d\n", height);
-		if (!word->graphics.texture_w)
-		{
-			ft_printf("%s", "2\n");
-			ft_free_split(&element);
-			exit_error(EIMG);
-		}
-	}
-	else if (ft_strcmp(element[0], "EA") == 0)
-	{
-		ft_printf("%s", "EA\n");
-		if (word->graphics.texture_e)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (stat(element[1], &path_stat) != 0 || !S_ISREG(path_stat.st_mode)) 
-		{
-			ft_free_split(&element);
-            exit_error(EPATH);
-        }
-		if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
-		{
-			ft_printf("%s", "1\n");
-			ft_free_split(&element);
-			exit_error(EEXP);
-		}
-		word->graphics.texture_e = mlx_xpm_file_to_image(word->graphics.mlx, element[1], &width, &height);
-		//ft_printf("w:%d\n", width);
-		//ft_printf("h:%d\n", height);
-		if (!word->graphics.texture_e)
-		{
-			ft_printf("%s", "2\n");
-			ft_free_split(&element);
-			exit_error(EIMG);
-		}
-	}
-	else if (ft_strcmp(element[0], "C") == 0)
-	{
-		ft_printf("%s", "C\n");
-		if (word->graphics.ceiling_color != -1)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (element[1])
-		{
-			rgb = ft_split(element[1], ',');
-			if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255 \
-				|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255 \
-					|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
-			{
-				ft_free_split(&rgb);
-				ft_free_split(&element);
-				exit_error(ECOLOR);
-			}
-			word->graphics.ceiling_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-		}
+		if (ft_strcmp(element[0], "NO") == 0 || ft_strcmp(element[0], "SO") == 0 \
+			|| ft_strcmp(element[0], "WE") == 0 || ft_strcmp(element[0], "EA") == 0)
+			check_nsew(element, word);
+		else if (ft_strcmp(element[0], "C") == 0 || ft_strcmp(element[0], "F") == 0)
+			check_cf(element, word);
 		else
 		{
 			ft_free_split(&element);
-			exit_error(ECOLOR);
+			exit_error(EUNKNOWN);
 		}
-	}
-	else if (ft_strcmp(element[0], "F") == 0)
-	{
-		ft_printf("%s", "F\n");
-		if (word->graphics.floor_color != -1)
-		{
-			ft_free_split(&element);
-			exit_error(EDUP);
-		}
-		if (element[1])
-		{
-			rgb = ft_split(element[1], ',');
-			if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255 \
-				|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255 \
-					|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
-			{
-				ft_free_split(&rgb);
-				ft_free_split(&element);
-				exit_error(ECOLOR);
-			}
-			word->graphics.floor_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-		}
-		else
-		{
-			ft_free_split(&element);
-			exit_error(ECOLOR);
-		}
-	}
-	else
-	{
-		ft_free_split(&element);
-		exit_error(EUNKNOWN);
 	}
 }
 
-/*int	parse_map(char *line, t_cub3d *world)
+
+void	parse_map(char *line, t_cub3d *world)
 {
 	int	size;
+	int	i;
+	int count;
 
 	size = ft_strlen(line);
 	if (size == 0)
@@ -240,9 +69,23 @@ void	check_identifier(char **element, t_cub3d *word)
 	// Check if the line is a valid map line
 	// On error, exit_error();
 	// On success, save the line in the map
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+			exit_error(EIEMAP);
+		if (i == 'N' || i == 'S' || i == 'E' || i == 'W')
+		{
+			if (count)
+				exit_error(EMULP);
+			count++;
+		}
+		i++;
+	}
 	llmap_append(line, world);
 	world->map_h++;
-}*/
+}
 
 void	check_map_started(char *line, t_cub3d *world)
 {
@@ -252,30 +95,14 @@ void	check_map_started(char *line, t_cub3d *world)
 	// Check if the line is the start of the map
 	// If it is, world->map_h++;
 	i = 0;
-	if (!check_empty_line(line))
+	while (line[i])
 	{
-		while (line[i])
-		{
-			if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
-				break ;
-			i++;
-		}
-		if (i == (int)ft_strlen(line))
-			world->map_h++;
-	}
-}
-
-int	check_empty_line(char *line)
-{
-	int i;
-	i = 0;
-	while (line[0])
-	{
-		if (!ft_isspace(line[i]))
-			return (0);
+		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+			return ;
 		i++;
 	}
-	return (1);
+	if (i == (int)ft_strlen(line))
+		world->map_h++;
 }
 
 /*
@@ -289,21 +116,26 @@ void	analyze_line(char *line, t_cub3d *world)
 	char	**element;
 	char	*trimmed_line;
 
-	trimmed_line = ft_strtrim(line, " ");
-	if (ft_strlen(trimmed_line) == 0)
+	trimmed_line = line;
+	if (!world->map_h)
 	{
-		free(trimmed_line);
-		return ;
+		trimmed_line = ft_strtrim(line, " ");
+		if (ft_strlen(trimmed_line) == 0)
+		{
+			free(trimmed_line);
+			return ;
+		}
 	}
 	check_map_started(trimmed_line, world);
 	if (!world->map_h)
 	{
+		
 		element = ft_split(trimmed_line, ' ');
 		parse_element(element, world);
 		ft_free_split(&element);
 	}
-	//else
-		//parse_map(trimmed_line, world);
+	else
+		parse_map(trimmed_line, world);
 }
 
 /*

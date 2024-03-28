@@ -39,7 +39,7 @@ DIRSTRUCTURES   :=  $(DIRSRC)structures/
 DIRS        :=  $(DIRSRC) $(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTURES)
 
 SRC         =   main.c
-CONFIG      =   check_map.c load_config.c
+CONFIG      =   check_map.c load_config.c check_element.c
 GAME        =   game.c image.c hooks.c bmp.c player.c render.c move.c turn.c
 RAYCASTING  =   raycasting.c
 STRUCTURES  =   cub3d.c destructors.c graphic_destructor.c map_destructor.c llmap.c map.c
