@@ -22,6 +22,7 @@
 # include <math.h>     // math functions (-lm required during compilation)
 # include <mlx.h>      // MinilibX
 # include <mlx_int.h>  // MinilibX
+# include <sys/stat.h> // stat, S_ISREG
 
 /*
 ** Window size
@@ -58,6 +59,15 @@
 # define EMLX "cub3d: Minilibx init error\n"
 # define EWIN "cub3d: Minilibx window error\n"
 # define EIMG "cub3d: Minilibx image error\n"
+# define EINFO "cub3d: Too much information for one element\n"
+# define EPATH "cub3d: Invalid path for xpm file\n"
+# define EDUP "cub3d: Duplicate identifier detected\n"
+# define EEXP "cub3d: Invalid texture file extention\n"
+# define EMRGB "cub3d: Missing RGB information\n"
+# define ECOLOR "cub3d: Invalid RGB set\n"
+# define EUNKNOWN "cub3d: Unkown element detected\n"
+# define EIEMAP "cub3d: Invalid element in map line\n"
+# define EMULP "cub3d: Multiple player detected\n"
 
 /*
 ** Keys

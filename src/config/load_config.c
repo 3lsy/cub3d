@@ -20,15 +20,15 @@ int	load_config(char *file, t_cub3d *world)
 {
 	// Verify ".cub" extension
 	parse_config(file, world);
-	translate_map(world);
-	if (valid_perimeter(world->map) == EXIT_FAILURE)
-		exit_error(EPERIMETER);
+	//translate_map(world->llmap, world);
+	//if (valid_perimeter(world->map) == EXIT_FAILURE)
+	//	exit_error(EPERIMETER);
 	return (EXIT_SUCCESS);
 }
 
 // unknown key, double keys, an invalid path,
 // invalid color, invalid map, invalid texture
-int	parse_element(char **element, t_cub3d *word)
+void	parse_element(char **element, t_cub3d *word)
 {
 	// Check if the first element is:
 	// NO, SO, WE, EA, F, C
@@ -37,11 +37,29 @@ int	parse_element(char **element, t_cub3d *word)
 	// word->graphics.ceiling_color = ft_rgb_to_int(r, g, b);
 	// On error, call ft_free_split(element) and exit_error();
 	// On success, save the element in the structure
+	if (element)
+	{
+		if (element[2])
+			exit_error(EINFO);
+		if (ft_strcmp(element[0], "NO") == 0 || ft_strcmp(element[0], "SO") == 0 \
+			|| ft_strcmp(element[0], "WE") == 0 || ft_strcmp(element[0], "EA") == 0)
+			check_nsew(element, word);
+		else if (ft_strcmp(element[0], "C") == 0 || ft_strcmp(element[0], "F") == 0)
+			check_cf(element, word);
+		else
+		{
+			ft_free_split(&element);
+			exit_error(EUNKNOWN);
+		}
+	}
 }
 
-int	parse_map(char *line, t_cub3d *world)
+
+void	parse_map(char *line, t_cub3d *world)
 {
 	int	size;
+	int	i;
+	int count;
 
 	size = ft_strlen(line);
 	if (size == 0)
@@ -51,16 +69,40 @@ int	parse_map(char *line, t_cub3d *world)
 	// Check if the line is a valid map line
 	// On error, exit_error();
 	// On success, save the line in the map
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+			exit_error(EIEMAP);
+		if (i == 'N' || i == 'S' || i == 'E' || i == 'W')
+		{
+			if (count)
+				exit_error(EMULP);
+			count++;
+		}
+		i++;
+	}
 	llmap_append(line, world);
 	world->map_h++;
 }
 
 void	check_map_started(char *line, t_cub3d *world)
 {
+	int	i;
 	if (world->map_h)
 		return ;
 	// Check if the line is the start of the map
 	// If it is, world->map_h++;
+	i = 0;
+	while (line[i])
+	{
+		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+			return ;
+		i++;
+	}
+	if (i == (int)ft_strlen(line))
+		world->map_h++;
 }
 
 /*
@@ -72,16 +114,28 @@ void	check_map_started(char *line, t_cub3d *world)
 void	analyze_line(char *line, t_cub3d *world)
 {
 	char	**element;
+	char	*trimmed_line;
 
-	check_map_started(line, world);
+	trimmed_line = line;
 	if (!world->map_h)
 	{
-		element = ft_split(line, ' ');
+		trimmed_line = ft_strtrim(line, " ");
+		if (ft_strlen(trimmed_line) == 0)
+		{
+			free(trimmed_line);
+			return ;
+		}
+	}
+	check_map_started(trimmed_line, world);
+	if (!world->map_h)
+	{
+		
+		element = ft_split(trimmed_line, ' ');
 		parse_element(element, world);
-		ft_free_split(element);
+		ft_free_split(&element);
 	}
 	else
-		parse_map(line, world);
+		parse_map(trimmed_line, world);
 }
 
 /*
