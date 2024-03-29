@@ -20,7 +20,8 @@ int	load_config(char *file, t_cub3d *world)
 {
 	// Verify ".cub" extension
 	parse_config(file, world);
-	//translate_map(world->llmap, world);
+	translate_map(world->llmap, world);
+	
 	//if (valid_perimeter(world->map) == EXIT_FAILURE)
 	//	exit_error(EPERIMETER);
 	return (EXIT_SUCCESS);
@@ -73,9 +74,9 @@ void	parse_map(char *line, t_cub3d *world)
 	count = 0;
 	while (line[i])
 	{
-		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
 			exit_error(EIEMAP);
-		if (i == 'N' || i == 'S' || i == 'E' || i == 'W')
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		{
 			if (count)
 				exit_error(EMULP);
@@ -87,22 +88,24 @@ void	parse_map(char *line, t_cub3d *world)
 	world->map_h++;
 }
 
-void	check_map_started(char *line, t_cub3d *world)
+int	check_map_started(char *line, t_cub3d *world)
 {
 	int	i;
 	if (world->map_h)
-		return ;
+		return (1);
 	// Check if the line is the start of the map
 	// If it is, world->map_h++;
 	i = 0;
+	
 	while (line[i])
 	{
-		if (i != '0' && i != '1' && i != 'N' && i != 'S' && i != 'E' && i != 'W' && i != ' ')
-			return ;
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
+			return (0);
 		i++;
 	}
 	if (i == (int)ft_strlen(line))
-		world->map_h++;
+		return (1);
+	return (0);
 }
 
 /*
@@ -117,6 +120,8 @@ void	analyze_line(char *line, t_cub3d *world)
 	char	*trimmed_line;
 
 	trimmed_line = line;
+	printf("origin height: %d\n", world->map_h);
+	ft_printf("%s\n", line);
 	if (!world->map_h)
 	{
 		trimmed_line = ft_strtrim(line, " ");
@@ -126,8 +131,7 @@ void	analyze_line(char *line, t_cub3d *world)
 			return ;
 		}
 	}
-	check_map_started(trimmed_line, world);
-	if (!world->map_h)
+	if (!check_map_started(trimmed_line, world))
 	{
 		
 		element = ft_split(trimmed_line, ' ');
@@ -135,7 +139,7 @@ void	analyze_line(char *line, t_cub3d *world)
 		ft_free_split(&element);
 	}
 	else
-		parse_map(trimmed_line, world);
+		parse_map(line, world);
 }
 
 /*
@@ -162,8 +166,8 @@ void	parse_config(char *file, t_cub3d *world)
 	{
 		analyze_line(line, world);
 		line = ft_get_next_line(world->fd);
-		if (!line)
-			exit_error(strerror(errno));
+		//if (!line)
+		//	exit_error(strerror(errno));
 	}
 	close(world->fd);
 	world->fd = -1;

@@ -12,13 +12,15 @@
 
 #include "cub3d.h"
 
-void	translate_map(char **map, t_cub3d *world)
+void	translate_map(t_doubly    *llmap, t_cub3d *world)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 
+	//ft_printf("w: %d\n", world->map_w);
+	//ft_printf("h: %d\n", world->map_h);
 	world->map = ft_calloc(world->map_h, sizeof(t_map *));
 	while (i < world->map_h)
 	{
@@ -26,14 +28,16 @@ void	translate_map(char **map, t_cub3d *world)
 		j = 0;
 		while (j < world->map_w)
 		{
-			world->map[i][j].type = map[i][j];
+			//ft_printf("line: %s\n", (char *)(llmap->obj));
+			world->map[i][j].type = ((char *)(llmap->obj))[j];
 			world->map[i][j].x = j;
 			world->map[i][j].y = i;
 			world->map[i][j].visited = 0;
 			ft_printf("%c ", world->map[i][j].type);
-			j++;
+			j++;	
 		}
 		ft_putchar_fd('\n', STDOUT_FILENO);
+		llmap = llmap->next;
 		i++;
 	}
 }

@@ -1,10 +1,11 @@
+NO ./textures/north_wall/mario_cube.xpm
+                                SO ./textures/north_wall/mario_cube.xpm
 
-  NO    ./textures/north_wall/mario_cube.xpm   
-
-
-SO ./textures/north_wall/mario_cube.xpm
-WE ./textures/north_wall/mario_cube.xpm
+   WE ./textures/north_wall/mario_cube.xpm  
 EA ./textures/north_wall/mario_cube.xpm
 
-F 220,300,0
+F 220,100,0
 C 225,30,0
+
+        1111111111111111111111111
+        1000000000110000000000001

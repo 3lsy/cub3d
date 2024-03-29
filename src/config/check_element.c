@@ -85,12 +85,7 @@ char    **check_rgb(char **element)
         exit_error(EMRGB);
     }
     rgb = ft_split(element[1], ',');
-    if (!rgb[0] || !rgb[1] || !rgb[2])
-    {
-        ft_free_split(&rgb);
-        ft_free_split(&element);
-        exit_error(EMRGB);
-    }
+    check_digit(rgb, element);
     if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255 \
 				|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255 \
 					|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
@@ -100,6 +95,24 @@ char    **check_rgb(char **element)
 		exit_error(ECOLOR);
 	}
     return (rgb);
+}
+
+void    check_digit(char **rgb, char **element)
+{
+    if (!rgb[0] || !rgb[1] || !rgb[2])
+    {
+        ft_free_split(&rgb);
+        ft_free_split(&element);
+        exit_error(EMRGB);
+    }
+    if ((ft_atoi(rgb[0]) == 0 && ft_strcmp(rgb[0], "0") != 0) \
+            || (ft_atoi(rgb[1]) == 0 && ft_strcmp(rgb[1], "0") != 0) \
+                || (ft_atoi(rgb[2]) == 0 && ft_strcmp(rgb[2], "0") != 0))
+    {
+        ft_free_split(&rgb);
+        ft_free_split(&element);
+        exit_error(EMRGB);
+    }
 }
 
 void	check_cf(char **element, t_cub3d *word)
@@ -115,4 +128,5 @@ void	check_cf(char **element, t_cub3d *word)
 		word->graphics.ceiling_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	else if (ft_strcmp(element[0], "F") == 0)
 		word->graphics.floor_color = ft_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+    ft_free_split(&rgb);
 }
