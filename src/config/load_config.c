@@ -21,9 +21,8 @@ int	load_config(char *file, t_cub3d *world)
 	// Verify ".cub" extension
 	parse_config(file, world);
 	translate_map(world->llmap, world);
-	
-	//if (valid_perimeter(world->map) == EXIT_FAILURE)
-	//	exit_error(EPERIMETER);
+	valid_perimeter(world->map, world->map_h, world->map_w);
+	ft_printf("%d\n", 1);
 	return (EXIT_SUCCESS);
 }
 

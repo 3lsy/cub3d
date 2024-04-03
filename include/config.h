@@ -26,5 +26,8 @@ t_img	*load_img(char **element, t_cub3d *world);
 void	check_texture(char **element);
 void    check_mult_id(char **element, t_cub3d *word);
 void    check_digit(char **rgb, char **element);
+void	check_outline(t_map **map, int h, int w);
+void	flood_fill(t_map **map, int i, int j, int h, int w);
+void	valid_perimeter(t_map **map, int h, int w);
 
 #endif

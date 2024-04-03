@@ -68,6 +68,8 @@
 # define EUNKNOWN "cub3d: Unkown element detected\n"
 # define EIEMAP "cub3d: Invalid element in map line\n"
 # define EMULP "cub3d: Multiple player detected\n"
+# define EWALLO "cub3d: Map must be surrunded by wall(outline)\n"
+# define EWALLI "cub3d: Map must be surrunded by wall(inner)\n"
 
 /*
 ** Keys
