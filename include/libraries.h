@@ -75,6 +75,7 @@
 # define EMMAP "cub3d: Map element missing\n"
 # define EMTEXT "cub3d: Texture element missing\n"
 # define EMCOLOR "cub3d: Color element missing\n"
+# define EMPLAYER "cub3d: Player missing\n"
 
 
 /*

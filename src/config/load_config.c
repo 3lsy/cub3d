@@ -61,7 +61,6 @@ void	parse_map(char *line, t_cub3d *world)
 {
 	int	size;
 	int	i;
-	int count;
 
 	size = ft_strlen(line);
 	if (size == 0)
@@ -72,16 +71,16 @@ void	parse_map(char *line, t_cub3d *world)
 	// On error, exit_error();
 	// On success, save the line in the map
 	i = 0;
-	count = 0;
 	while (line[i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
 			exit_error(EIEMAP);
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		{
-			if (count)
+			if (world->player.x != -1 || world->player.y != -1)
 				exit_error(EMULP);
-			count++;
+			world->player.x = i;
+			world->player.y = world->map_h;
 		}
 		i++;
 	}
@@ -165,7 +164,6 @@ void	parse_config(char *file, t_cub3d *world)
 {
 	char	*line;
 	int		map_end;
-	int		player_c;
 
 	map_end = 0;
 	world->fd = open(file, O_RDONLY);
@@ -182,6 +180,8 @@ void	parse_config(char *file, t_cub3d *world)
 	}
 	if (!world->map_h)
 		exit_error(EMMAP);
+	if (world->player.x == -1 && world->player.y == -1)
+		exit_error(EMPLAYER);
 	close(world->fd);
 	world->fd = -1;
 }
