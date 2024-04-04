@@ -59,6 +59,7 @@
 # define EMLX "cub3d: Minilibx init error\n"
 # define EWIN "cub3d: Minilibx window error\n"
 # define EIMG "cub3d: Minilibx image error\n"
+# define ECUB "cub3d: Invalid extention for .cub file\n"
 # define EINFO "cub3d: Too much information for one element\n"
 # define EPATH "cub3d: Invalid path for xpm file\n"
 # define EDUP "cub3d: Duplicate identifier detected\n"
@@ -70,6 +71,11 @@
 # define EMULP "cub3d: Multiple player detected\n"
 # define EWALLO "cub3d: Map must be surrunded by wall(outline)\n"
 # define EWALLI "cub3d: Map must be surrunded by wall(inner)\n"
+# define EMNLE "cub3d: Map is not the last element\n"
+# define EMMAP "cub3d: Map element missing\n"
+# define EMTEXT "cub3d: Texture element missing\n"
+# define EMCOLOR "cub3d: Color element missing\n"
+
 
 /*
 ** Keys

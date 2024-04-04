@@ -19,6 +19,8 @@
 int	load_config(char *file, t_cub3d *world)
 {
 	// Verify ".cub" extension
+	if (ft_strncmp(file + ft_strlen(file) - 4, ".cub", 4) != 0)
+		exit_error(ECUB);
 	parse_config(file, world);
 	translate_map(world->llmap, world);
 	valid_perimeter(world->map, world->map_h, world->map_w);
@@ -103,7 +105,14 @@ int	check_map_started(char *line, t_cub3d *world)
 		i++;
 	}
 	if (i == (int)ft_strlen(line))
+	{
+		if (!world->graphics.texture_n || !world->graphics.texture_s || !world->graphics.texture_e \
+			|| !world->graphics.texture_w)
+			exit_error(EMTEXT);
+		if (world->graphics.ceiling_color == -1 || world->graphics.floor_color == -1)
+			exit_error(EMCOLOR);
 		return (1);
+	}
 	return (0);
 }
 
@@ -113,22 +122,20 @@ int	check_map_started(char *line, t_cub3d *world)
 */
 /// @brief Analyze the line and check if it's an element or a map
 /// @param line The line to analyze
-void	analyze_line(char *line, t_cub3d *world)
+void	analyze_line(char *line, t_cub3d *world, int *map_end)
 {
 	char	**element;
 	char	*trimmed_line;
 
 	trimmed_line = line;
-	printf("origin height: %d\n", world->map_h);
-	ft_printf("%s\n", line);
-	if (!world->map_h)
+
+	trimmed_line = ft_strtrim(line, " ");
+	if (ft_strlen(trimmed_line) == 0)
 	{
-		trimmed_line = ft_strtrim(line, " ");
-		if (ft_strlen(trimmed_line) == 0)
-		{
-			free(trimmed_line);
-			return ;
-		}
+		if (world->map_h && !(*map_end))
+			(*map_end) = 1;
+		free(trimmed_line);
+		return ;
 	}
 	if (!check_map_started(trimmed_line, world))
 	{
@@ -138,7 +145,11 @@ void	analyze_line(char *line, t_cub3d *world)
 		ft_free_split(&element);
 	}
 	else
+	{
+		if (*map_end)
+			exit_error(EMNLE);
 		parse_map(line, world);
+	}
 }
 
 /*
@@ -153,7 +164,10 @@ void	analyze_line(char *line, t_cub3d *world)
 void	parse_config(char *file, t_cub3d *world)
 {
 	char	*line;
+	int		map_end;
+	int		player_c;
 
+	map_end = 0;
 	world->fd = open(file, O_RDONLY);
 	if (world->fd == -1)
 		exit_error(strerror(errno));
@@ -163,11 +177,11 @@ void	parse_config(char *file, t_cub3d *world)
 		exit_error(strerror(errno));
 	while (line)
 	{
-		analyze_line(line, world);
+		analyze_line(line, world, &map_end);
 		line = ft_get_next_line(world->fd);
-		//if (!line)
-		//	exit_error(strerror(errno));
 	}
+	if (!world->map_h)
+		exit_error(EMMAP);
 	close(world->fd);
 	world->fd = -1;
 }
