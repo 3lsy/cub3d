@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: syan <syan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/13 10:17:34 by echavez-         ###   ########.fr        #
+#    Updated: 2024/04/05 14:31:06 by syan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ DIRSTRUCTURES   :=  $(DIRSRC)structures/
 DIRS        :=  $(DIRSRC) $(DIRCONFIG) $(DIRGAME) $(DIRRAYCASTING) $(DIRSTRUCTURES)
 
 SRC         =   main.c
-CONFIG      =   check_map.c load_config.c check_element.c
+CONFIG      =   check_map.c load_config.c check_element.c load_config_utils.c
 GAME        =   game.c image.c hooks.c bmp.c player.c render.c move.c turn.c
 RAYCASTING  =   raycasting.c
 STRUCTURES  =   cub3d.c destructors.c graphic_destructor.c map_destructor.c llmap.c map.c

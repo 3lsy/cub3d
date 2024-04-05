@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:31:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:59 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:52:22 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cub3d	*cub(int action)
 		.mlx = NULL, .win = NULL, .texture_n = NULL, .texture_s = NULL,
 		.texture_w = NULL, .texture_e = NULL, .mmap = NULL, .bmp = NULL,
 		.local_endian = -1, .ceiling_color = -1, .floor_color = -1,
-		.mmap_w = -1, .mmap_h = -1, 
+		.mmap_w = -1, .mmap_h = -1,
 	}
 	};
 
