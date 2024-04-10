@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/14 10:39:16 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:08:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void raycasting()
 	wall_distance();
 }
 
-void	wall_distance(t_player *player, t_pair m)
+void	wall_distance(t_world *world, t_player *player, double angle)
 {
-	
 }
 */
 
