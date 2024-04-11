@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:38:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/05 15:30:16 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/11 14:59:41 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	parse_element(char **element, t_cub3d *word)
 		if (element[2])
 			exit_error(EINFO);
 		id = element[0];
-		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0 \
+		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0
 			|| ft_strcmp(id, "WE") == 0 || ft_strcmp(id, "EA") == 0)
 			check_nsew(element, word);
 		else if (ft_strcmp(id, "C") == 0 || ft_strcmp(id, "F") == 0)
@@ -61,11 +61,11 @@ void	parse_map(char *line, t_cub3d *world)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'\
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
 			exit_error(EIEMAP);
-		if (line[i] == 'N' || line[i] == 'S' || \
-			line[i] == 'E' || line[i] == 'W')
+		if (line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W')
 		{
 			if (world->player.x != -1 || world->player.y != -1)
 				exit_error(EMULP);

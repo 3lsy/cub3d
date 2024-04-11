@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:49:51 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/05 15:18:59 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/11 14:58:01 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	check_outline(t_map **map, int h, int w)
 	i = 0;
 	while (i < w)
 	{
-		if ((map[0][i].type != ' ' && map[0][i].type != '1') || \
-			(map[h - 1][i].type != ' ' && map[h - 1][i].type != '1'))
+		if ((map[0][i].type != ' ' && map[0][i].type != '1')
+			|| (map[h - 1][i].type != ' ' && map[h - 1][i].type != '1'))
 			exit_error(EWALLO);
 		i++;
 	}
 	i = 1;
 	while (i < h - 1)
 	{
-		if ((map[i][0].type != ' ' && map[i][0].type != '1') || \
-			(map[i][w - 1].type != ' ' && map[i][w - 1].type != '1'))
+		if ((map[i][0].type != ' ' && map[i][0].type != '1')
+			|| (map[i][w - 1].type != ' ' && map[i][w - 1].type != '1'))
 			exit_error(EWALLI);
 		i++;
 	}
@@ -88,9 +88,9 @@ void	flood_fill(t_map **map, int i, int j, t_cub3d *world)
 	if ((map[i][j].type) == '1' || map[i][j].visited)
 		return ;
 	map[i][j].visited = 1;
-	if ((map[i][j].type) == '0' || (map[i][j].type) == 'N' || \
-			(map[i][j].type) == 'S' || (map[i][j].type) == 'E' || \
-				(map[i][j].type) == 'W')
+	if ((map[i][j].type) == '0' || (map[i][j].type) == 'N'
+			|| (map[i][j].type) == 'S' || (map[i][j].type) == 'E'
+			|| (map[i][j].type) == 'W')
 		exit_error(EPERIMETER);
 	if (i + 1 < world->map_h)
 		flood_fill(map, i + 1, j, world);

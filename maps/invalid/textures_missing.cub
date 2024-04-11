@@ -1,6 +1,6 @@
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+SO ./textures/north_wall/mario_cube.xpm
+WE ./textures/north_wall/mario_cube.xpm  
+EA ./textures/north_wall/mario_cube.xpm
 
 F 20,20,20
 C 200,200,200
