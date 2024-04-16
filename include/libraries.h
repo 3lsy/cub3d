@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/12 21:55:32 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 00:41:27 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@
 
 # define TURN_SPEED 0.1
 # define MOVE_SPEED 2
+
+/*
+** Raycasting
+*/
+
+# define FOV 60
+# define MAX_DEPTH 20
 
 /*
 ** Error messages
@@ -108,6 +115,22 @@ typedef struct s_graphics
 }	t_graphics;
 
 /*
+** Raycasting
+** xy := x and y position (x, y)
+** dir := Ray direction on (x, y)
+** russ := Ray unitary step size (x, y)
+** len_1d_axis := lenght 1 dimension on axis (x, y)
+*/
+typedef struct s_raycasting
+{
+	double	xy[2];
+	double	dir[2];
+	double	russ[2];
+	double	len_1d_axis[2];
+	double	step[2];
+}	t_raycasting;
+
+/*
 ** Player
 ** x, y := player position
 ** mx, my := minimap position
@@ -115,14 +138,15 @@ typedef struct s_graphics
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	mx;
-	double	my;
-	double	angle;
-	double	move_speed;
-	double	turn_speed;
-	double	diameter;
+	double			x;
+	double			y;
+	double			mx;
+	double			my;
+	double			angle;
+	double			move_speed;
+	double			turn_speed;
+	double			diameter;
+	t_raycasting	ray;
 }	t_player;
 
 /// @brief Linked list map

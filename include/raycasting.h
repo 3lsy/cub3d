@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:29 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/14 10:37:04 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:36:53 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libraries.h"
 
-int		is_arrow(t_player p, int x, int y);
+void	init_ray(t_player *p);
+void	raycasting(t_cub3d *world);
 
 #endif

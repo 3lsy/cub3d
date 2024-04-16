@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:31:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 23:26:59 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 00:41:12 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_cub3d	*cub(int action)
 		.player = {
 		.x = -1, .y = -1, .mx = -1, .my = -1, .angle = 0,
 		.move_speed = MOVE_SPEED, .turn_speed = TURN_SPEED * M_PI,
-		.diameter = MMAP_SCALE * PLAYER_SIZE
+		.diameter = MMAP_SCALE * PLAYER_SIZE, .ray = {
+		.xy = {-1, -1}, .dir = {-1, -1}, .russ = {-1, -1}, .step = {0, 0},
+		.len_1d_axis = {-1, -1}
+	}
 	},
 		.graphics = {
 		.mlx = NULL, .win = NULL, .texture_n = NULL, .texture_s = NULL,
