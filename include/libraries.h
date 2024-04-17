@@ -52,7 +52,7 @@
 */
 
 # define FOV 60
-# define ANGLE_UNIT 0.01
+# define ANGLE_UNIT 0.0025
 # define MAX_DEPTH 20
 # define FOV_COLOR 0x00FF00
 
@@ -61,7 +61,7 @@
 */
 
 # define STRIP_W 8
-# define CUBE_H 20
+# define CUBE_H 30
 
 /*
 ** Error messages
@@ -88,6 +88,9 @@
 # define R_ARROW 65363
 
 # define ESC 65307
+
+// Toggle minimap
+# define M 109
 
 /*
 ** Structure options
@@ -123,6 +126,7 @@ typedef struct s_graphics
 	t_img	*map_3d;
 	int		**bmp;
 	int		**bmp_3d;
+	int		mmap_on;
 }	t_graphics;
 
 /*

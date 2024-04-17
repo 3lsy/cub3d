@@ -68,10 +68,8 @@ double	cast_ray(t_cub3d *world, t_player *p)
 	mdepth = MAX_DEPTH * MMAP_SCALE;
 	depth = 0;
 	hit = 0;
-	printf("-- Initial depth: %f - position: %f, %f\n", depth, p->ray.xy[0], p->ray.xy[1]);
 	while (!hit && depth < mdepth)
 	{
-		// walk to next map cell
 		if ((p->ray.len_1d_axis[0] < p->ray.len_1d_axis[1] && fabs(p->ray.len_1d_axis[0]) != 0) || fabs(p->ray.len_1d_axis[1]) == 0)
 		{
 			p->ray.xy[0] += p->ray.step[0];
@@ -84,9 +82,6 @@ double	cast_ray(t_cub3d *world, t_player *p)
 			depth = p->ray.len_1d_axis[1];
 			p->ray.len_1d_axis[1] += p->ray.russ[1] * MMAP_SCALE;
 		}
-		printf("-- Depth: %f - position: %f, %f\n", depth, p->ray.xy[0], p->ray.xy[1]);
-		// check if the ray hit a wall
-		// check that ray.xy is in the map
 		if (p->ray.xy[0] >= 0 && p->ray.xy[1] >= 0 && p->ray.xy[0] < world->map_w * MMAP_SCALE && p->ray.xy[1] < world->map_h * MMAP_SCALE)
 		{
 			if (world->map[(int)p->ray.xy[1] / MMAP_SCALE][(int)p->ray.xy[0] / MMAP_SCALE].type == '1')
@@ -125,25 +120,37 @@ void	cast_fov(t_cub3d *world, t_player *p)
 {
 	double	fov_rad;
 	double	angle_iterator;
+	int	i;
 
 	fov_rad = FOV * (M_PI / 180);
 	angle_iterator = p->angle - fov_rad / 2;
+	i = 0;
 	while (angle_iterator <= p->angle + fov_rad / 2)
 	{
 		init_ray(p, angle_iterator);
 		p->ray.depth = cast_ray(world, p);
 		paint_ray(world, p->ray.vray);
-		paint_strip(&world->graphics, p, p->ray.depth);
+		paint_strip(&world->graphics, p, i * STRIP_W);
 		angle_iterator += ANGLE_UNIT * M_PI;
+		i++;
 	}
 }
 
 void	raycasting(t_cub3d *world)
 {
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < W_HEIGHT)
+	{
+		x = 0;
+		while (x < W_WIDTH)
+		{
+			world->graphics.bmp_3d[y][x] = 0x000000;
+			x++;
+		}
+		y++;
+	}
 	cast_fov(world, &world->player);
-	printf("Mini map pos     x: %f, y: %f\n", world->player.mx, world->player.my);
-	printf("Modulus pos      x: %f, y: %f\n", fmod(world->player.mx, MMAP_SCALE), fmod(world->player.my, MMAP_SCALE));
-	printf("Unit vector dir  x: %f, y: %f\n", world->player.ray.dir[0], world->player.ray.dir[1]);
-	printf("R unit step size x: %f, y: %f\n", world->player.ray.russ[0], world->player.ray.russ[1]);
-	printf("Len 1d axis      x: %f, y: %f\n", world->player.ray.len_1d_axis[0], world->player.ray.len_1d_axis[1]);
 }

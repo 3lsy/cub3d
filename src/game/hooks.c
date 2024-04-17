@@ -23,6 +23,12 @@ int	event_render(void *p)
 	return (0);
 }
 
+void	toggle_minimap(t_cub3d *world)
+{
+	world->graphics.mmap_on = !world->graphics.mmap_on;
+	render(world);
+}
+
 int	key_press(int keycode, void *p)
 {
 	if (keycode == W)
@@ -37,6 +43,9 @@ int	key_press(int keycode, void *p)
 		turn_left(p);
 	else if (keycode == R_ARROW)
 		turn_right(p);
+	else if (keycode == M)
+		toggle_minimap(p);
+	else
 	if (keycode == ESC)
 		exit(EXIT_SUCCESS);
 	return (0);

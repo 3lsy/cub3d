@@ -25,7 +25,7 @@ void	new_strip(t_graphics *graphics, int x, int y, double len)
 	while (y < W_HEIGHT && y < len)
 	{
 		i = x;
-		while (i < x + STRIP_W)
+		while (i < W_WIDTH && i < x + STRIP_W)
 		{
 			if (i < W_WIDTH)
 				graphics->bmp_3d[y][i] = 0x00FF00;
@@ -38,13 +38,18 @@ void	new_strip(t_graphics *graphics, int x, int y, double len)
 /*
 ** Use this function each cast of a ray to paint the strip.
 */
-void	paint_strip(t_graphics *graphics, t_player *p, double depth)
+void	paint_strip(t_graphics *graphics, t_player *p, int x)
 {
 	double	len;
+	int		y_pos;
 
-	len = W_HEIGHT / depth * 10 ;
-	//new_strip(graphics, p->ray.xy[0], (W_HEIGHT - len) / 2, len);
-	new_strip(graphics, p->ray.xy[0], 0, len);
+	len = (W_HEIGHT / p->ray.depth) * CUBE_H;
+	y_pos = (W_HEIGHT - len) / 2;
+	if (y_pos < 0)
+		y_pos = 0;
+	if (x < 0)
+		x = 0;
+	new_strip(graphics, W_WIDTH - x, y_pos, len + y_pos);
 }
 
 void	paint_3d(t_cub3d *world)

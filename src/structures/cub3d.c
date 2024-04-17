@@ -29,7 +29,7 @@ t_cub3d	*cub(int action)
 		.texture_w = NULL, .texture_e = NULL, .mmap = NULL, .bmp = NULL,
 		.map_3d = NULL, .bmp_3d = NULL,
 		.local_endian = -1, .ceiling_color = -1, .floor_color = -1,
-		.mmap_w = -1, .mmap_h = -1,
+		.mmap_w = -1, .mmap_h = -1, .mmap_on = 1,
 	}
 	};
 

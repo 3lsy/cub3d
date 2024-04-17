@@ -18,7 +18,7 @@
 void	init_ray(t_player *p, double angle);
 void	raycasting(t_cub3d *world);
 void	new_bmp_3d(t_graphics *graphics, t_cub3d *word);
-void	paint_strip(t_graphics *graphics, t_player *p, double depth);
+void	paint_strip(t_graphics *graphics, t_player *p, int x);
 void	paint_3d(t_cub3d *world);
 
 #endif

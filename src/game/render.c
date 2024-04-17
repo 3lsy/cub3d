@@ -57,8 +57,9 @@ void	render(t_cub3d *world)
 	update_mmap(&world->graphics.bmp, (t_pair){world->graphics.mmap_w,
 		world->graphics.mmap_h}, world->player, world);
 	raycasting(world);
-	paint_mmap(world);
 	paint_3d(world);
+	if (world->graphics.mmap_on)
+		paint_mmap(world);
 }
 
 /*
