@@ -169,6 +169,7 @@ Here is a valid example of a simple map:
 
 ## Controls 🎮
 <kbd>⎋ Esc</kbd> Close the window and quit the program cleanly.
+<kbd>M</kbd> Toggle mini map.
 ### Camera
 <kbd>←</kbd> Look left inside the <b>maze</b>.</br>
 <kbd>→</kbd> Look right inside the <b>maze</b>.

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 18:07:54 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:01:11 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define PLAYER_COLOR 0xff8da1
 // Arrow thickness in pixels
 # define ARROW_W 2
-# define ARROW_LEN MMAP_SCALE / 2
+# define ARROW_LEN 7
 # define ARROW_COLOR 0x000000
 
 # define TURN_SPEED 0.1
