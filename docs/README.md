@@ -5,6 +5,10 @@ Built in [miniLibX](https://github.com/42Paris/minilibx-linux), inspired on [Wol
 like Doom (Id Software, 1993), Doom II (Id Software, 1994), Duke Nukem 3D (3D Realm, 1996)
 and Quake (Id Software, 1996), that are additional eternal milestones in the world of video games.
 
+<p align="center">
+  <img src = "raycasting2d.gif" width = "100%">
+</p>
+
 ## How to build cub3d ? 🏗️
 > [!NOTE]
 > #### Requirements

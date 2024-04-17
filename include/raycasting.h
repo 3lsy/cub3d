@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:29 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/16 18:36:53 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:00:53 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libraries.h"
 
-void	init_ray(t_player *p);
+void	init_ray(t_player *p, double angle);
 void	raycasting(t_cub3d *world);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 01:21:05 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:07:24 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 ** p->ray.len_1d_axis = len accumul in the ray direction to reach the next cell
 */
 
-void	init_ray(t_player *p)
+void	init_ray(t_player *p, double angle)
 {
 	p->ray.xy[0] = p->mx;
 	p->ray.xy[1] = p->my;
-	p->ray.dir[0] = cos(p->angle);
-	p->ray.dir[1] = -sin(p->angle);
+	p->ray.dir[0] = cos(angle);
+	p->ray.dir[1] = -sin(angle);
 	p->ray.russ[0] = 0;
 	p->ray.russ[1] = 0;
 	if (0.01 <= p->ray.dir[0] || p->ray.dir[0] <= -0.01)
@@ -104,16 +104,46 @@ void	cast_ray(t_cub3d *world, t_player *p, double vray[2])
 	}
 }
 
-void	raycasting(t_cub3d *world)
+void	paint_ray(t_cub3d *world, double vray[2])
 {
+	world->graphics.bmp[(int)vray[1]][(int)vray[0]] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1] + 1][(int)vray[0]] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1] - 1][(int)vray[0]] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1]][(int)vray[0] + 1] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1]][(int)vray[0] - 1] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1] + 2][(int)vray[0]] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1] - 2][(int)vray[0]] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1]][(int)vray[0] + 2] = FOV_COLOR;
+	world->graphics.bmp[(int)vray[1]][(int)vray[0] - 2] = FOV_COLOR;
+}
+
+/*
+** FOV
+*/
+void	cast_fov(t_cub3d *world, t_player *p)
+{
+	double	fov_rad;
+	double	angle_iterator;
 	double	vray[2];
 
-	init_ray(&world->player);
-	cast_ray(world, &world->player, vray);
+	fov_rad = FOV * (M_PI / 180);
+	angle_iterator = p->angle - fov_rad / 2;
+	while (angle_iterator <= p->angle + fov_rad / 2)
+	{
+		init_ray(p, angle_iterator);
+		cast_ray(world, p, vray);
+		paint_ray(world, vray);
+		world->graphics.bmp[(int)vray[1]][(int)vray[0]] = 0xff5555;
+		angle_iterator += ANGLE_UNIT * M_PI;
+	}
+}
+
+void	raycasting(t_cub3d *world)
+{
+	cast_fov(world, &world->player);
 	printf("Mini map pos     x: %f, y: %f\n", world->player.mx, world->player.my);
 	printf("Modulus pos      x: %f, y: %f\n", fmod(world->player.mx, MMAP_SCALE), fmod(world->player.my, MMAP_SCALE));
 	printf("Unit vector dir  x: %f, y: %f\n", world->player.ray.dir[0], world->player.ray.dir[1]);
 	printf("R unit step size x: %f, y: %f\n", world->player.ray.russ[0], world->player.ray.russ[1]);
 	printf("Len 1d axis      x: %f, y: %f\n", world->player.ray.len_1d_axis[0], world->player.ray.len_1d_axis[1]);
-	printf("Vector ray       x: %f, y: %f\n\n", vray[0], vray[1]);
 }

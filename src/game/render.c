@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:12:47 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/16 18:36:38 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:37:21 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	render(t_cub3d *world)
 {
 	update_mmap(&world->graphics.bmp, (t_pair){world->graphics.mmap_w,
 		world->graphics.mmap_h}, world->player, world);
-	paint_mmap(world);
 	raycasting(world);
+	paint_mmap(world);
 }
 
 /*
