@@ -71,6 +71,7 @@ void	cast_fov(t_cub3d *world, t_player *p)
 {
 	double	fov_rad;
 	double	angle_iterator;
+	double	delta_angle;
 	int	i;
 
 	fov_rad = FOV * (M_PI / 180);
@@ -80,6 +81,10 @@ void	cast_fov(t_cub3d *world, t_player *p)
 	{
 		init_ray(p, angle_iterator);
 		cast_ray(world, p);
+		delta_angle = p->angle - angle_iterator;
+		if (delta_angle < 0)
+			delta_angle += 2 * M_PI;
+		p->ray.depth *= cos(delta_angle);
 		paint_ray(world, p->ray.vray);
 		paint_strip(&world->graphics, p, i * world->graphics.strip_w);
 		angle_iterator += ANGLE_UNIT * M_PI;
