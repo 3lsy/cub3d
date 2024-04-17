@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 20:25:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:38:59 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	cast_fov(t_cub3d *world, t_player *p)
 	double	fov_rad;
 	double	angle_iterator;
 	int		i;
+	double	delta_angle;
 
 	fov_rad = FOV * (M_PI / 180);
 	angle_iterator = p->angle - fov_rad / 2;
@@ -80,8 +81,12 @@ void	cast_fov(t_cub3d *world, t_player *p)
 	{
 		init_ray(p, angle_iterator);
 		cast_ray(world, p);
+		delta_angle = p->angle - angle_iterator;
+		if (delta_angle < 0)
+			delta_angle += 2 * M_PI;
+		p->ray.depth *= cos(delta_angle);
 		paint_ray(world, p->ray.vray);
-		paint_strip(&world->graphics, p, i * STRIP_W);
+		paint_strip(&world->graphics, p, i * world->graphics.strip_w);
 		angle_iterator += ANGLE_UNIT * M_PI;
 		i++;
 	}
