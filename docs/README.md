@@ -182,12 +182,20 @@ Here is a valid example of a simple map:
 
 Raycasting is a rendering technique used in computer graphics to simulate the path of light rays from a virtual camera into a scene.
 
-![image](https://github.com/3lsy/cub3d/assets/107457733/4e4bc2de-4323-4ec8-9b1d-1e59adc06870)
+  <a href="https://lodev.org/cgtutor/raycasting.html">
+    <img src="https://github.com/3lsy/cub3d/assets/107457733/4e4bc2de-4323-4ec8-9b1d-1e59adc06870" alt="RUSS" />
+  </a>
+
+### Requirements
 
 The first step in Raycasting to cast one ray to determine the distance between the player and a wall.
 
 We must have some information first:
+- Starting position
+- Direction's unit vector
 
+  <img src = "https://github.com/3lsy/cub3d/assets/107457733/2bdef3ea-ad64-43d2-b1f6-a32b8d337396" width = "30%">
+  
 ```C
 // Ray starting position coordinates (player's position)
 p->ray.xy[0] = p->mx;
@@ -196,11 +204,21 @@ p->ray.xy[1] = p->my;
 p->ray.dir[0] = cos(angle);
 p->ray.dir[1] = -sin(angle);
 ```
+
+### Intersection of cells
+
 We also have to calculate the *`ray unit step size`* on the player's **direction's unit vector**.
 
-<img src = "https://github.com/3lsy/cub3d/assets/107457733/2bdef3ea-ad64-43d2-b1f6-a32b8d337396" width = "30%">
-
 To know the lenght of each cell intersection happening on the X axis and on the Y axis, through the ray.
+
+<div style="text-align:center">
+  <a href="https://lodev.org/cgtutor/raycasting.html">
+    <img src="https://github.com/3lsy/cub3d/assets/107457733/ca9fdfaa-cba5-4223-9ec2-b315ccb04e27" alt="RUSS" />
+  </a>
+</div>
+
+<sub><sup>DeltaDist is our Ray Unit Step Size.</sup></sub>
+
 
 > [!NOTE]
 > This value is a *percentage*, taking a cell as a **unit**. It can be adapted as needed.
