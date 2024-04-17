@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 18:13:18 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:04:38 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,90 +19,36 @@
 ** p->ray.russ = unit step size of player direction (# of cells to move in x/y)
 ** p->ray.len_1d_axis = len accumul in the ray direction to reach the next cell
 */
-
 void	init_ray(t_player *p, double angle)
 {
 	p->ray.xy[0] = p->mx;
 	p->ray.xy[1] = p->my;
 	p->ray.dir[0] = cos(angle);
 	p->ray.dir[1] = -sin(angle);
-	p->ray.russ[0] = 0;
-	p->ray.russ[1] = 0;
-	if (0.01 <= p->ray.dir[0] || p->ray.dir[0] <= -0.01) 
-		p->ray.russ[0] = sqrt(1 + pow(p->ray.dir[1], 2) / pow(p->ray.dir[0], 2));
-	if (0.01 <= p->ray.dir[1] || p->ray.dir[1] <= -0.01)
-		p->ray.russ[1] = sqrt(1 + pow(p->ray.dir[0], 2) / pow(p->ray.dir[1], 2));
-
-	// dir : left
-	if (p->ray.dir[0] < 0)
-	{
-		p->ray.step[0] = -MMAP_SCALE;
-		p->ray.len_1d_axis[0] = fmod(p->mx, MMAP_SCALE) * p->ray.russ[0];
-	}
-	// dir : right
-	else
-	{
-		p->ray.step[0] = MMAP_SCALE;
-		p->ray.len_1d_axis[0] = (MMAP_SCALE - fmod(p->mx, MMAP_SCALE)) * p->ray.russ[0];
-	}
-	// dir : up
-	if (p->ray.dir[1] < 0)
-	{
-		p->ray.step[1] = -MMAP_SCALE;
-		p->ray.len_1d_axis[1] = fmod(p->my, MMAP_SCALE) * p->ray.russ[1];
-	}
-	// dir : down
-	else
-	{
-		p->ray.step[1] = MMAP_SCALE;
-		p->ray.len_1d_axis[1] = (MMAP_SCALE - fmod(p->my, MMAP_SCALE)) * p->ray.russ[1];
-	}
+	init_ray_russ(p);
+	init_ray_step(p);
 }
 
-double	cast_ray(t_cub3d *world, t_player *p)
+void	cast_ray(t_cub3d *world, t_player *p)
 {
 	int		hit;
 	double	mdepth;
-	double	depth;
 
 	mdepth = MAX_DEPTH * MMAP_SCALE;
-	depth = 0;
+	p->ray.depth = 0;
 	hit = 0;
-	printf("-- Initial depth: %f - position: %f, %f\n", depth, p->ray.xy[0], p->ray.xy[1]);
-	while (!hit && depth < mdepth)
+	while (!hit && p->ray.depth < mdepth)
 	{
-		// walk to next map cell
-		if ((p->ray.len_1d_axis[0] < p->ray.len_1d_axis[1] && fabs(p->ray.len_1d_axis[0]) != 0) || fabs(p->ray.len_1d_axis[1]) == 0)
-		{
-			p->ray.xy[0] += p->ray.step[0];
-			depth = p->ray.len_1d_axis[0];
-			p->ray.len_1d_axis[0] += p->ray.russ[0] * MMAP_SCALE;
-		}
-		else
-		{
-			p->ray.xy[1] += p->ray.step[1];
-			depth = p->ray.len_1d_axis[1];
-			p->ray.len_1d_axis[1] += p->ray.russ[1] * MMAP_SCALE;
-		}
-		printf("-- Depth: %f - position: %f, %f\n", depth, p->ray.xy[0], p->ray.xy[1]);
-		// check if the ray hit a wall
-		// check that ray.xy is in the map
-		if (p->ray.xy[0] >= 0 && p->ray.xy[1] >= 0 && p->ray.xy[0] < world->map_w * MMAP_SCALE && p->ray.xy[1] < world->map_h * MMAP_SCALE)
-		{
-			if (world->map[(int)p->ray.xy[1] / MMAP_SCALE][(int)p->ray.xy[0] / MMAP_SCALE].type == '1')
-				hit = 1;
-		}
-		else
-			hit = 2;
+		walk_on_ray(p);
+		hit = found_hit(world, p);
 	}
 	if (hit)
 	{
-		p->ray.vray[0] = p->ray.dir[0] * depth;
-		p->ray.vray[1] = p->ray.dir[1] * depth;
+		p->ray.vray[0] = p->ray.dir[0] * p->ray.depth;
+		p->ray.vray[1] = p->ray.dir[1] * p->ray.depth;
 		p->ray.vray[0] += p->mx;
 		p->ray.vray[1] += p->my;
 	}
-	return (depth);
 }
 
 void	paint_ray(t_cub3d *world, double vray[2])
@@ -131,7 +77,7 @@ void	cast_fov(t_cub3d *world, t_player *p)
 	while (angle_iterator <= p->angle + fov_rad / 2)
 	{
 		init_ray(p, angle_iterator);
-		p->ray.depth = cast_ray(world, p);
+		cast_ray(world, p);
 		paint_ray(world, p->ray.vray);
 		paint_strip(&world->graphics, p, p->ray.depth);
 		angle_iterator += ANGLE_UNIT * M_PI;
@@ -141,9 +87,4 @@ void	cast_fov(t_cub3d *world, t_player *p)
 void	raycasting(t_cub3d *world)
 {
 	cast_fov(world, &world->player);
-	printf("Mini map pos     x: %f, y: %f\n", world->player.mx, world->player.my);
-	printf("Modulus pos      x: %f, y: %f\n", fmod(world->player.mx, MMAP_SCALE), fmod(world->player.my, MMAP_SCALE));
-	printf("Unit vector dir  x: %f, y: %f\n", world->player.ray.dir[0], world->player.ray.dir[1]);
-	printf("R unit step size x: %f, y: %f\n", world->player.ray.russ[0], world->player.ray.russ[1]);
-	printf("Len 1d axis      x: %f, y: %f\n", world->player.ray.len_1d_axis[0], world->player.ray.len_1d_axis[1]);
 }
