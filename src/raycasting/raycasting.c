@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 20:04:38 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:25:29 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	cast_fov(t_cub3d *world, t_player *p)
 {
 	double	fov_rad;
 	double	angle_iterator;
-	int	i;
+	int		i;
 
 	fov_rad = FOV * (M_PI / 180);
 	angle_iterator = p->angle - fov_rad / 2;
