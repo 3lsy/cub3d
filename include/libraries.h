@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 19:01:11 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 22:10:17 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 ** Raycasting
 ** 60 = M_PI / 3
 ** (x * M_PI) / (M_PI / 3) = x * 3
+** Fixed FOV
+** strip_w depends on FOV
 */
 
 # define FOV 60
@@ -62,7 +64,6 @@
 ** 3D Map
 */
 
-# define STRIP_W 8
 # define CUBE_H 30
 
 /*
