@@ -6,7 +6,11 @@ like Doom (Id Software, 1993), Doom II (Id Software, 1994), Duke Nukem 3D (3D Re
 and Quake (Id Software, 1996), that are additional eternal milestones in the world of video games.
 
 <p align="center">
-  <img src = "raycasting2d.gif" width = "100%">
+  <img src = "raycasting3D.gif">
+</p>
+
+<p align="center">
+  <img src = "raycasting2d.gif">
 </p>
 
 ## How to build cub3d ? 🏗️
