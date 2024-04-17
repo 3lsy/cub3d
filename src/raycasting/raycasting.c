@@ -81,7 +81,7 @@ void	cast_fov(t_cub3d *world, t_player *p)
 		init_ray(p, angle_iterator);
 		cast_ray(world, p);
 		paint_ray(world, p->ray.vray);
-		paint_strip(&world->graphics, p, i * STRIP_W);
+		paint_strip(&world->graphics, p, i * world->graphics.strip_w);
 		angle_iterator += ANGLE_UNIT * M_PI;
 		i++;
 	}

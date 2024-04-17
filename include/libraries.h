@@ -44,15 +44,17 @@
 # define ARROW_LEN 7
 # define ARROW_COLOR 0x000000
 
-# define TURN_SPEED 0.1
+# define TURN_SPEED 0.009
 # define MOVE_SPEED 2
 
 /*
 ** Raycasting
+** 60 = M_PI / 3
+** (x * M_PI) / (M_PI / 3) = x * 3
 */
 
 # define FOV 60
-# define ANGLE_UNIT 0.0025
+# define ANGLE_UNIT 0.0001
 # define MAX_DEPTH 20
 # define FOV_COLOR 0x00FF00
 
@@ -127,6 +129,7 @@ typedef struct s_graphics
 	int		**bmp;
 	int		**bmp_3d;
 	int		mmap_on;
+	double	strip_w;
 }	t_graphics;
 
 /*

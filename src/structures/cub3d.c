@@ -21,7 +21,7 @@ t_cub3d	*cub(int action)
 		.move_speed = MOVE_SPEED, .turn_speed = TURN_SPEED * M_PI,
 		.diameter = MMAP_SCALE * PLAYER_SIZE, .ray = {
 		.xy = {-1, -1}, .dir = {-1, -1}, .russ = {-1, -1}, .step = {0, 0},
-		.len_1d_axis = {-1, -1}, .vray = {0, 0}, .depth = -1
+		.len_1d_axis = {-1, -1}, .vray = {0, 0}, .depth = -1,
 	}
 	},
 		.graphics = {
@@ -30,6 +30,7 @@ t_cub3d	*cub(int action)
 		.map_3d = NULL, .bmp_3d = NULL,
 		.local_endian = -1, .ceiling_color = -1, .floor_color = -1,
 		.mmap_w = -1, .mmap_h = -1, .mmap_on = 1,
+		.strip_w = W_WIDTH / (1 / (3 * ANGLE_UNIT)),
 	}
 	};
 

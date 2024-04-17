@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-void	new_bmp_3d(t_graphics *graphics, t_cub3d *word)
+void	new_bmp_3d(t_graphics *graphics, t_cub3d *world)
 {
 	graphics->bmp_3d = bmp_square(W_WIDTH, W_HEIGHT, 0x000000);
-	(void)word;
+	(void)world;
 }
 
 void	new_strip(t_graphics *graphics, int x, int y, double len)
@@ -25,7 +25,7 @@ void	new_strip(t_graphics *graphics, int x, int y, double len)
 	while (y < W_HEIGHT && y < len)
 	{
 		i = x;
-		while (i < W_WIDTH && i < x + STRIP_W)
+		while (i < W_WIDTH && i < x + graphics->strip_w)
 		{
 			if (i < W_WIDTH)
 				graphics->bmp_3d[y][i] = 0x00FF00;
