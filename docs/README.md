@@ -177,3 +177,51 @@ Here is a valid example of a simple map:
 <kbd>A</kbd> Move <b>left</b> the point of view through the <b>maze</b>.</br>
 <kbd>S</kbd> Move <b>down</b> the point of view through the <b>maze</b>.</br>
 <kbd>D</kbd> Move <b>right</b> the point of view through the <b>maze</b>.</br>
+
+## Raycasting 🌄
+
+Raycasting is a rendering technique used in computer graphics to simulate the path of light rays from a virtual camera into a scene.
+
+![image](https://github.com/3lsy/cub3d/assets/107457733/4e4bc2de-4323-4ec8-9b1d-1e59adc06870)
+
+The first step in Raycasting to cast one ray to determine the distance between the player and a wall.
+
+We must have some information first:
+
+```C
+// Ray starting position coordinates (player's position)
+p->ray.xy[0] = p->mx;
+p->ray.xy[1] = p->my;
+// Unit vector of direction from the angle in radians.
+p->ray.dir[0] = cos(angle);
+p->ray.dir[1] = -sin(angle);
+```
+We also have to calculate the *`ray unit step size`* on the player's **direction's unit vector**.
+
+<img src = "https://github.com/3lsy/cub3d/assets/107457733/2bdef3ea-ad64-43d2-b1f6-a32b8d337396" width = "30%">
+
+To know the lenght of each cell intersection happening on the X axis and on the Y axis, through the ray.
+
+> [!NOTE]
+> This value is a *percentage*, taking a cell as a **unit**. It can be adapted as needed.
+
+![Triangle](https://github.com/3lsy/cub3d/assets/107457733/a5ba8fe6-3f74-4451-accd-976eb75fcd44)
+
+Let's say that the side AB = `x` and AC = `y`, then we have the **hypotenuse step sizes** as follow:
+
+```math
+S_{x} = \sqrt{1^{2}+(\frac{y}{x})^{2}}
+```
+
+```math
+S_{y} = \sqrt{(\frac{x}{y})^{2}+1^{2}}
+```
+
+We can implement this functions in C like this:
+```C
+// dir = {x, y} player direction's unit vector coordinates;
+p->ray.russ[0] = sqrt(1 + pow(p->ray.dir[1], 2) / pow(p->ray.dir[0], 2));
+p->ray.russ[1] = sqrt(1 + pow(p->ray.dir[0], 2) / pow(p->ray.dir[1], 2));
+```
+
+---
