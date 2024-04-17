@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:05:50 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:07:54 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 ** Minimap sprite size
 */
 
-# define MMAP_SCALE 30
+# define MMAP_SCALE 15
 # define MMAP_FLOOR 0xDDDDDD
 # define MMAP_WALL 0x222222
 // Scale percentage
@@ -41,7 +41,7 @@
 # define PLAYER_COLOR 0xff8da1
 // Arrow thickness in pixels
 # define ARROW_W 2
-# define ARROW_LEN 15
+# define ARROW_LEN MMAP_SCALE / 2
 # define ARROW_COLOR 0x000000
 
 # define TURN_SPEED 0.1
@@ -55,6 +55,13 @@
 # define ANGLE_UNIT 0.01
 # define MAX_DEPTH 20
 # define FOV_COLOR 0x00FF00
+
+/*
+** 3D Map
+*/
+
+# define STRIP_W 8
+# define CUBE_H 20
 
 /*
 ** Error messages
@@ -113,7 +120,9 @@ typedef struct s_graphics
 	int		mmap_w;
 	int		mmap_h;
 	t_img	*mmap;
+	t_img	*map_3d;
 	int		**bmp;
+	int		**bmp_3d;
 }	t_graphics;
 
 /*
@@ -130,6 +139,8 @@ typedef struct s_raycasting
 	double	russ[2];
 	double	len_1d_axis[2];
 	double	step[2];
+	double	vray[2];
+	double	depth;
 }	t_raycasting;
 
 /*

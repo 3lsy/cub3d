@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 13:07:24 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:13:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_ray(t_player *p, double angle)
 	p->ray.dir[1] = -sin(angle);
 	p->ray.russ[0] = 0;
 	p->ray.russ[1] = 0;
-	if (0.01 <= p->ray.dir[0] || p->ray.dir[0] <= -0.01)
+	if (0.01 <= p->ray.dir[0] || p->ray.dir[0] <= -0.01) 
 		p->ray.russ[0] = sqrt(1 + pow(p->ray.dir[1], 2) / pow(p->ray.dir[0], 2));
 	if (0.01 <= p->ray.dir[1] || p->ray.dir[1] <= -0.01)
 		p->ray.russ[1] = sqrt(1 + pow(p->ray.dir[0], 2) / pow(p->ray.dir[1], 2));
@@ -59,7 +59,7 @@ void	init_ray(t_player *p, double angle)
 	}
 }
 
-void	cast_ray(t_cub3d *world, t_player *p, double vray[2])
+double	cast_ray(t_cub3d *world, t_player *p)
 {
 	int		hit;
 	double	mdepth;
@@ -97,11 +97,12 @@ void	cast_ray(t_cub3d *world, t_player *p, double vray[2])
 	}
 	if (hit)
 	{
-		vray[0] = p->ray.dir[0] * depth;
-		vray[1] = p->ray.dir[1] * depth;
-		vray[0] += p->mx;
-		vray[1] += p->my;
+		p->ray.vray[0] = p->ray.dir[0] * depth;
+		p->ray.vray[1] = p->ray.dir[1] * depth;
+		p->ray.vray[0] += p->mx;
+		p->ray.vray[1] += p->my;
 	}
+	return (depth);
 }
 
 void	paint_ray(t_cub3d *world, double vray[2])
@@ -124,16 +125,15 @@ void	cast_fov(t_cub3d *world, t_player *p)
 {
 	double	fov_rad;
 	double	angle_iterator;
-	double	vray[2];
 
 	fov_rad = FOV * (M_PI / 180);
 	angle_iterator = p->angle - fov_rad / 2;
 	while (angle_iterator <= p->angle + fov_rad / 2)
 	{
 		init_ray(p, angle_iterator);
-		cast_ray(world, p, vray);
-		paint_ray(world, vray);
-		world->graphics.bmp[(int)vray[1]][(int)vray[0]] = 0xff5555;
+		p->ray.depth = cast_ray(world, p);
+		paint_ray(world, p->ray.vray);
+		paint_strip(&world->graphics, p, p->ray.depth);
 		angle_iterator += ANGLE_UNIT * M_PI;
 	}
 }
