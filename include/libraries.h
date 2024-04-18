@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/05 14:50:55 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/18 13:42:41 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define EMTEXT "cub3d: Texture element missing\n"
 # define EMCOLOR "cub3d: Color element missing\n"
 # define EMPLAYER "cub3d: Player missing\n"
+# define EXPM "cub3d: Invalid xpm file\n"
 
 /*
 ** Keys

@@ -83,7 +83,7 @@ cub3d: Map must be surrunded by wall(outline)
 
 Test file: ./maps/invalid/textures_dir.cub
 Error
-cub3d: Invalid path for xpm file
+cub3d: Invalid texture file extention
 
 Test file: ./maps/invalid/textures_duplicates.cub
 Error
@@ -91,11 +91,11 @@ cub3d: Duplicate identifier detected
 
 Test file: ./maps/invalid/textures_forbidden.cub
 Error
-cub3d: Minilibx image error
+cub3d: Invalid xpm file
 
 Test file: ./maps/invalid/textures_invalid.cub
 Error
-cub3d: Invalid path for xpm file
+cub3d: Invalid texture file extention
 
 Test file: ./maps/invalid/textures_missing.cub
 Error

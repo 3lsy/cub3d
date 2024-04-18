@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:36:50 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/11 14:55:20 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/18 13:40:16 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 
 void	check_texture(char **element)
 {
-	struct stat	path_stat;
-
-	if (stat(element[1], &path_stat) != 0 || !S_ISREG(path_stat.st_mode))
-	{
-		ft_free_split(&element);
-		exit_error(EPATH);
-	}
 	if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
 	{
 		ft_free_split(&element);
@@ -43,7 +36,7 @@ t_img	*load_img(char **element, t_cub3d *world)
 	if (!img)
 	{
 		ft_free_split(&element);
-		exit_error(EIMG);
+		exit_error(EXPM);
 	}
 	return (img);
 }
