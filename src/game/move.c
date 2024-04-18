@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:32:16 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 01:24:55 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:06:58 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	move_up(t_cub3d *world)
 
 	x = world->player.mx + cos(world->player.angle) * world->player.move_speed;
 	y = world->player.my - sin(world->player.angle) * world->player.move_speed;
-	if (world->graphics.bmp[(int)y][(int)x] == MMAP_WALL
-		|| world->graphics.bmp[(int)y][(int)x] == 0x000000
-		|| world->graphics.bmp[(int)y][(int)x] == FOV_COLOR
+	if (world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type != '0'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == '1'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == ' '
 		|| x < 0 || y < 0 || x > world->graphics.mmap_w
@@ -43,9 +41,7 @@ void	move_down(t_cub3d *world)
 		* world->player.move_speed;
 	y = world->player.my - sin(world->player.angle + M_PI)
 		* world->player.move_speed;
-	if (world->graphics.bmp[(int)y][(int)x] == MMAP_WALL
-		|| world->graphics.bmp[(int)y][(int)x] == 0x000000
-		|| world->graphics.bmp[(int)y][(int)x] == FOV_COLOR
+	if (world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type != '0'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == '1'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == ' '
 		|| x < 0 || y < 0 || x > world->graphics.mmap_w
@@ -65,9 +61,7 @@ void	move_left(t_cub3d *world)
 		* world->player.move_speed;
 	y = world->player.my - sin(world->player.angle + M_PI / 2)
 		* world->player.move_speed;
-	if (world->graphics.bmp[(int)y][(int)x] == MMAP_WALL
-		|| world->graphics.bmp[(int)y][(int)x] == 0x000000
-		|| world->graphics.bmp[(int)y][(int)x] == FOV_COLOR
+	if (world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type != '0'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == '1'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == ' '
 		|| x < 0 || y < 0 || x > world->graphics.mmap_w
@@ -87,9 +81,7 @@ void	move_right(t_cub3d *world)
 		* world->player.move_speed;
 	y = world->player.my - sin(world->player.angle - M_PI / 2)
 		* world->player.move_speed;
-	if (world->graphics.bmp[(int)y][(int)x] == MMAP_WALL
-		|| world->graphics.bmp[(int)y][(int)x] == 0x000000
-		|| world->graphics.bmp[(int)y][(int)x] == FOV_COLOR
+	if (world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type != '0'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == '1'
 		|| world->map[(int)(y / MMAP_SCALE)][(int)(x / MMAP_SCALE)].type == ' '
 		|| x < 0 || y < 0 || x > world->graphics.mmap_w

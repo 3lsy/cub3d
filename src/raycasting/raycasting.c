@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 21:38:59 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:36:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,18 @@ void	raycasting(t_cub3d *world)
 {
 	int	y;
 	int	x;
+	int	color;
 
+	color = world->graphics.ceiling_color;
 	y = 0;
 	while (y < W_HEIGHT)
 	{
+		if (y > W_HEIGHT / 2)
+			color = world->graphics.floor_color;
 		x = 0;
 		while (x < W_WIDTH)
 		{
-			world->graphics.bmp_3d[y][x] = 0x000000;
+			world->graphics.bmp_3d[y][x] = color;
 			x++;
 		}
 		y++;

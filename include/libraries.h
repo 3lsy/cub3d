@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 22:10:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:11:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 */
 
 # define FOV 60
-# define ANGLE_UNIT 0.0001
+# define ANGLE_UNIT 0.0005
 # define MAX_DEPTH 20
 # define FOV_COLOR 0x00FF00
 

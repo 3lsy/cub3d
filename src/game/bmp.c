@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:17:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/14 10:38:20 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:19:57 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ static void	init_dimensions(t_graphics *graphics, t_cub3d *world)
 void	new_bmp(t_graphics *graphics, t_cub3d *world)
 {
 	init_dimensions(graphics, world);
-	graphics->bmp = bmp_square(graphics->mmap_w, graphics->mmap_h, 0x000000);
+	graphics->bmp = bmp_square(graphics->mmap_w, graphics->mmap_h,
+			graphics->ceiling_color);
 	paint_bmp(&graphics->bmp, (t_pair){graphics->mmap_w, graphics->mmap_h},
 		&world->player, world->map);
 	world->map[(int)world->player.y][(int)world->player.x].type = '0';
