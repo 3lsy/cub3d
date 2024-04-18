@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:42:57 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 18:16:06 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:21:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	init_hooks(t_cub3d *world)
 		event_render, world);
 	mlx_hook(world->graphics.win, UnmapNotify, StructureNotifyMask,
 		event_render, world);
-	// mlx_key_hook(world->graphics.win, key_press, world);
 	mlx_hook(world->graphics.win,
 		KeyPress, KeyPressMask, key_press, world);
 }

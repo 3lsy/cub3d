@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:17:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:25:12 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:24:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	is_player(t_player p, int x, int y)
 	return (0);
 }
 
+// if (map[m.y / MMAP_SCALE][m.x / MMAP_SCALE].type == ' ')
+// (*bmp)[m.y][m.x] = 0x00ff00; // test for update map
 void	paint_bmp(int ***bmp, t_pair m, t_player *player, t_map **map)
 {
 	int	w;
@@ -67,8 +69,6 @@ void	paint_bmp(int ***bmp, t_pair m, t_player *player, t_map **map)
 				(*bmp)[m.y][m.x] = PLAYER_COLOR;
 			if (is_arrow(*player, m.x, m.y))
 				(*bmp)[m.y][m.x] = ARROW_COLOR;
-			// if (map[m.y / MMAP_SCALE][m.x / MMAP_SCALE].type == ' ')
-			// (*bmp)[m.y][m.x] = 0x00ff00; // test for update map
 		}
 	}
 }

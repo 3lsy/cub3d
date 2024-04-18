@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:42:13 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/10 21:44:40 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:16:57 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	key_press(int keycode, void *p)
 		turn_right(p);
 	else if (keycode == M)
 		toggle_minimap(p);
-	else
-	if (keycode == ESC)
+	else if (keycode == ESC)
 		exit(EXIT_SUCCESS);
 	return (0);
 }
