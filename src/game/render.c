@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:12:47 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/20 17:24:52 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 23:49:57 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	render(t_cub3d *world)
 	paint_3d(world);
 	if (world->graphics.mmap_on)
 		paint_mmap(world);
-	// mlx_put_image_to_window(world->graphics.mlx, world->graphics.win,
-	// 	world->graphics.texture_w, W_WIDTH/2, W_HEIGHT/2);
 }
 
 /*
