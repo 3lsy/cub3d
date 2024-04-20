@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:20:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:22:04 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:28:53 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,32 @@ int	load_config(char *file __attribute__((unused)), t_cub3d *world)
 	world->graphics.ceiling_color = ft_rgb_to_int(220, 255, 252);
 	world->graphics.floor_color = ft_rgb_to_int(180, 95, 6);
 	translate_map((char **)mapa, world);
+	int b;
+	//creation of the textures images
+	world->graphics.texture_n = mlx_xpm_file_to_image(world->graphics.mlx,
+			"textures/north_wall/crystal_box.xpm", &b, &b);
+	world->graphics.texture_s = mlx_xpm_file_to_image(world->graphics.mlx,
+			"textures/south_wall/crystal_imac.xpm", &b, &b);
+	world->graphics.texture_w = mlx_xpm_file_to_image(world->graphics.mlx,
+			"textures/west_wall/crystal_sign.xpm", &b, &b);
+	world->graphics.texture_e = mlx_xpm_file_to_image(world->graphics.mlx,
+			"textures/east_wall/crystal.xpm", &b, &b);
+	//creation of the textures bitmaps
+	world->graphics.texture_n_bmp = bmp_square(world->graphics.texture_n->width,
+			world->graphics.texture_n->height, 0x000000);
+	world->graphics.texture_s_bmp = bmp_square(world->graphics.texture_s->width,
+			world->graphics.texture_s->height, 0x000000);
+	world->graphics.texture_w_bmp = bmp_square(world->graphics.texture_w->width,
+			world->graphics.texture_w->height, 0x000000);
+	world->graphics.texture_e_bmp = bmp_square(world->graphics.texture_e->width,
+			world->graphics.texture_e->height, 0x000000);
+	//conversion of the textures to bitmaps
+	img_to_bmp(world->graphics.texture_n, world->graphics.texture_n_bmp);
+	img_to_bmp(world->graphics.texture_s, world->graphics.texture_s_bmp);
+	img_to_bmp(world->graphics.texture_w, world->graphics.texture_w_bmp);
+	img_to_bmp(world->graphics.texture_e, world->graphics.texture_e_bmp);
+	// world->graphics.texture_w = new_img(world->graphics.mlx, w, h,
+	// 		world->graphics.texture_n_bmp);
 	return (EXIT_SUCCESS);
 }
 

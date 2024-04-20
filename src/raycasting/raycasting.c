@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:18:00 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 11:36:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 20:50:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 */
 void	init_ray(t_player *p, double angle)
 {
+	p->dir[0] = cos(p->angle);
+	p->dir[1] = -sin(p->angle);
 	p->ray.xy[0] = p->mx;
 	p->ray.xy[1] = p->my;
 	p->ray.dir[0] = cos(angle);

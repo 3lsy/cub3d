@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 20:01:32 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/17 20:07:00 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:12:36 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_ray_russ(t_player *p)
 
 void	init_ray_step(t_player *p)
 {
+	p->ray.hit_axis = -1;
 	if (p->ray.dir[0] < 0)
 	{
 		p->ray.step[0] = -MMAP_SCALE;
@@ -76,11 +77,13 @@ void	walk_on_ray(t_player *p)
 		p->ray.xy[0] += p->ray.step[0];
 		p->ray.depth = p->ray.len_1d_axis[0];
 		p->ray.len_1d_axis[0] += p->ray.russ[0] * MMAP_SCALE;
+		p->ray.hit_axis = X_AXIS;
 	}
 	else
 	{
 		p->ray.xy[1] += p->ray.step[1];
 		p->ray.depth = p->ray.len_1d_axis[1];
 		p->ray.len_1d_axis[1] += p->ray.russ[1] * MMAP_SCALE;
+		p->ray.hit_axis = Y_AXIS;
 	}
 }

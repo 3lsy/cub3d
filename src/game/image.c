@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:36:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 00:44:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:31:50 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,39 @@ void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp)
 			color = bmp[y][x];
 			fixed_color = mlx_get_color_value(mlx, color);
 			set_color_ptr(ptr, i, (unsigned char *)&fixed_color, x);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	get_pixel(t_img *img, int x, int y)
+{
+	int		color;
+	char	*dst;
+
+	dst = img->data + (y * img->size_line + x * (img->bpp / 8));
+	//printf("dst: %p\n", dst);
+	color = *(unsigned int *)dst;
+	//printf("color: %d\n", color);
+	return (color);
+}
+
+void	img_to_bmp(t_img *img, int **bmp)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < img->height)
+	{
+		//printf("y: %d\n", y);
+		x = 0;
+		while (x < img->width)
+		{
+			//printf("x: %d\n", x);
+			bmp[y][x] = get_pixel(img, x, y);
+			//printf("bmp[y][x]: %d\n", bmp[y][x]);
 			x++;
 		}
 		y++;

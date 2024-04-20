@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 12:11:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/20 20:48:35 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define ANGLE_UNIT 0.0005
 # define MAX_DEPTH 20
 # define FOV_COLOR 0x00FF00
+# define X_AXIS 0
+# define Y_AXIS 1
 
 /*
 ** 3D Map
@@ -118,9 +120,13 @@ typedef struct s_graphics
 	void	*win;
 	int		local_endian;
 	t_img	*texture_n;
+	int		**texture_n_bmp;
 	t_img	*texture_s;
+	int		**texture_s_bmp;
 	t_img	*texture_w;
+	int		**texture_w_bmp;
 	t_img	*texture_e;
+	int		**texture_e_bmp;
 	int		ceiling_color;
 	int		floor_color;
 	int		mmap_w;
@@ -149,6 +155,7 @@ typedef struct s_raycasting
 	double	step[2];
 	double	vray[2];
 	double	depth;
+	int		hit_axis;
 }	t_raycasting;
 
 /*
@@ -164,6 +171,7 @@ typedef struct s_player
 	double			mx;
 	double			my;
 	double			angle;
+	double			dir[2];
 	double			move_speed;
 	double			turn_speed;
 	double			diameter;
