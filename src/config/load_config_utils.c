@@ -58,24 +58,29 @@ int	check_map_started(char *line, t_cub3d *world)
 	}
 	if (i == (int)ft_strlen(line))
 	{
-		check_element_missing(line, world);
+		check_element_missing(world);
 		return (1);
 	}
 	return (0);
 }
 
-void	check_element_missing(char *line, t_cub3d *world)
+void	check_element_missing(t_cub3d *world)
 {
+	int	missing;
+
+	missing = 0;
 	if (!world->graphics.texture_n || !world->graphics.texture_s
 		|| !world->graphics.texture_e || !world->graphics.texture_w)
 	{
-		free(line);
+		missing++;
 		exit_error(EMTEXT);
 	}
 	if (world->graphics.ceiling_color == -1
 		|| world->graphics.floor_color == -1)
 	{
-		free(line);
+		missing++;
+		if (missing == 2)
+			exit_error(EMBOTH);
 		exit_error(EMCOLOR);
 	}
 }

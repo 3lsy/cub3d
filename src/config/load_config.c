@@ -105,7 +105,7 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 	{
 		free(trimmed_line);
 		if (*map_end)
-			exit_error(EMNLE);
+			exit_error(EELMAP);
 		parse_map(line, world);
 	}
 }
