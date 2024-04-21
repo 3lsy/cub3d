@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:36:50 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/18 13:40:16 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 10:54:40 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_img	*load_img(char **element, t_cub3d *world)
 	int		width;
 	t_img	*img;
 
-	img = mlx_xpm_file_to_image(world->graphics.mlx, \
-		element[1], &width, &height);
+	img = mlx_xpm_file_to_image(world->graphics.mlx,
+			element[1], &width, &height);
 	if (!img)
 	{
 		ft_free_split(&element);
