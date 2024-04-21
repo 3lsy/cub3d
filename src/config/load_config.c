@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:38:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/21 16:23:49 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:04:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 		exit_error(strerror(errno));
 	if (ft_strlen(trimmed_line) == 0)
 	{
-		if (world->map_h && !(*map_end))
-			(*map_end) = 1;
-		free(trimmed_line);
+		check_empty_line(trimmed_line, world, map_end);
 		return ;
 	}
 	if (!check_map_started(trimmed_line, world))

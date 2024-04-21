@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:28:03 by syan              #+#    #+#             */
-/*   Updated: 2024/04/11 15:01:43 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 20:52:09 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ void	check_digit(char **rgb, char **element)
 		ft_free_split(&rgb);
 		config_error(EMRGB, &element, 1);
 	}
-	if ((ft_atoi(rgb[0]) == 0 && ft_strcmp(rgb[0], "0") != 0)
-		|| (ft_atoi(rgb[1]) == 0 && ft_strcmp(rgb[1], "0") != 0)
-		|| (ft_atoi(rgb[2]) == 0 && ft_strcmp(rgb[2], "0") != 0))
+	if (!ft_isnum(rgb[0]) || !ft_isnum(rgb[1]) || !ft_isnum(rgb[2]))
 	{
 		ft_free_split(&rgb);
-		config_error(EMRGB, &element, 1);
+		config_error(ECOLOR, &element, 1);
 	}
 }
 
@@ -60,13 +58,31 @@ int	check_map_started(char *line, t_cub3d *world)
 	}
 	if (i == (int)ft_strlen(line))
 	{
-		if (!world->graphics.texture_n || !world->graphics.texture_s
-			|| !world->graphics.texture_e || !world->graphics.texture_w)
-			exit_error(EMTEXT);
-		if (world->graphics.ceiling_color == -1
-			|| world->graphics.floor_color == -1)
-			exit_error(EMCOLOR);
+		check_element_missing(line, world);
 		return (1);
 	}
 	return (0);
+}
+
+void	check_element_missing(char *line, t_cub3d *world)
+{
+	if (!world->graphics.texture_n || !world->graphics.texture_s
+		|| !world->graphics.texture_e || !world->graphics.texture_w)
+	{
+		free(line);
+		exit_error(EMTEXT);
+	}
+	if (world->graphics.ceiling_color == -1
+		|| world->graphics.floor_color == -1)
+	{
+		free(line);
+		exit_error(EMCOLOR);
+	}
+}
+
+void	check_empty_line(char *line, t_cub3d *world, int *map_end)
+{
+	if (world->map_h && !(*map_end))
+		(*map_end) = 1;
+	free(line);
 }
