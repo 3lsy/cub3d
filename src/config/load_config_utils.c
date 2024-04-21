@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:28:03 by syan              #+#    #+#             */
-/*   Updated: 2024/04/21 18:34:10 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 18:44:48 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,11 @@ void	check_element_missiing(char *line, t_cub3d *world)
 		free(line);
 		exit_error(EMCOLOR);
 	}
+}
+
+void	check_empty_line(char *line, t_cub3d *world, int *map_end)
+{
+	if (world->map_h && !(*map_end))
+		(*map_end) = 1;
+	free(line);
 }
