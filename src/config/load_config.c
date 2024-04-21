@@ -89,8 +89,9 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 	char	**element;
 	char	*trimmed_line;
 
-	trimmed_line = line;
 	trimmed_line = ft_strtrim(line, " ");
+	if (!trimmed_line)
+		exit_error(strerror(errno));
 	if (ft_strlen(trimmed_line) == 0)
 	{
 		if (world->map_h && !(*map_end))
@@ -101,11 +102,13 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 	if (!check_map_started(trimmed_line, world))
 	{
 		element = ft_split(trimmed_line, ' ');
+		free(trimmed_line);
 		parse_element(element, world);
 		ft_free_split(&element);
 	}
 	else
 	{
+		free(trimmed_line);
 		if (*map_end)
 			exit_error(EMNLE);
 		parse_map(line, world);
