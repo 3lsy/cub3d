@@ -1,0 +1,43 @@
+name: Leak Tests
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'lib/libft/**'
+      - 'maps/**'
+  workflow_dispatch:
+jobs:
+  leak-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get -y install valgrind xorg \
+            libxext-dev zlib1g-dev libbsd-dev
+
+      - name: Build cub3d
+        run: make
+
+      - name: Leak test
+        run: |
+          for map in maps/*/*.xpm; do
+            echo "Testing $map..."
+            valmessage=$(valgrind ./cub3d "$map" 2>&1 || true)
+            leaks=$(echo "$valmessage" | grep 'no leaks are possible' || true)
+            if [ ! -z "$leaks" ]; then
+              echo "There are no leaks for $map! ✅🔥"
+            else
+              echo "Errors for $map:"
+              echo "$valmessage"
+              echo "Leaks FAILURE for $map! 😞❌"
+              exit 1
+            fi
+          done
