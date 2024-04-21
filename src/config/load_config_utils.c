@@ -6,7 +6,7 @@
 /*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:28:03 by syan              #+#    #+#             */
-/*   Updated: 2024/04/21 18:13:21 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 18:34:10 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,24 @@ int	check_map_started(char *line, t_cub3d *world)
 	}
 	if (i == (int)ft_strlen(line))
 	{
-		if (!world->graphics.texture_n || !world->graphics.texture_s
-			|| !world->graphics.texture_e || !world->graphics.texture_w)
-		{
-			free(line);
-			exit_error(EMTEXT);
-		}
-		if (world->graphics.ceiling_color == -1
-			|| world->graphics.floor_color == -1)
-		{
-			free(line);
-			exit_error(EMCOLOR);
-		}
+		check_element_missiing(line, world);
 		return (1);
 	}
 	return (0);
+}
+
+void	check_element_missiing(char *line, t_cub3d *world)
+{
+	if (!world->graphics.texture_n || !world->graphics.texture_s
+		|| !world->graphics.texture_e || !world->graphics.texture_w)
+	{
+		free(line);
+		exit_error(EMTEXT);
+	}
+	if (world->graphics.ceiling_color == -1
+		|| world->graphics.floor_color == -1)
+	{
+		free(line);
+		exit_error(EMCOLOR);
+	}
 }
