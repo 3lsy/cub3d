@@ -20,7 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get -y install valgrind xorg \
+          DEBIAN_FRONTEND=noninteractive sudo apt-get update \
+            && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install valgrind xorg \
             libxext-dev zlib1g-dev libbsd-dev
 
       - name: Build cub3d
