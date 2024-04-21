@@ -19,6 +19,7 @@
 # include "structures.h"
 
 void	exit_error(char *message);
+void	config_error(char *message, char ***element, int i);
 t_cub3d	*cub(int action);
 
 #endif

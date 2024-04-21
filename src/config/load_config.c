@@ -34,8 +34,8 @@ void	parse_element(char **element, t_cub3d *word)
 
 	if (element)
 	{
-		if (element[2])
-			exit_error(EINFO);
+		if (element[2] && ft_strlen(element[2]) > 0)
+			config_error(EINFO, &element, 2);
 		id = element[0];
 		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0
 			|| ft_strcmp(id, "WE") == 0 || ft_strcmp(id, "EA") == 0)
@@ -43,10 +43,7 @@ void	parse_element(char **element, t_cub3d *word)
 		else if (ft_strcmp(id, "C") == 0 || ft_strcmp(id, "F") == 0)
 			check_cf(element, word);
 		else
-		{
-			ft_free_split(&element);
-			exit_error(EUNKNOWN);
-		}
+			config_error(EUNKNOWN, &element, 0);
 	}
 }
 
@@ -91,10 +88,7 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
-	{
-		free(line);
 		exit_error(strerror(errno));
-	}
 	if (ft_strlen(trimmed_line) == 0)
 	{
 		if (world->map_h && !(*map_end))
@@ -129,7 +123,6 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 /// @brief world->map_h is the height of the map
 void	parse_config(char *file, t_cub3d *world)
 {
-	char	*line;
 	int		map_end;
 
 	map_end = 0;
@@ -137,14 +130,14 @@ void	parse_config(char *file, t_cub3d *world)
 	if (world->fd == -1)
 		exit_error(strerror(errno));
 	world->map_h = 0;
-	line = ft_get_next_line(world->fd);
-	if (!line)
+	world->line = ft_get_next_line(world->fd);
+	if (!world->line)
 		exit_error(strerror(errno));
-	while (line)
+	while (world->line)
 	{
-		analyze_line(line, world, &map_end);
-		free(line);
-		line = ft_get_next_line(world->fd);
+		analyze_line(world->line, world, &map_end);
+		free(world->line);
+		world->line = ft_get_next_line(world->fd);
 	}
 	if (!world->map_h)
 		exit_error(EMMAP);
