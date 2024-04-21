@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:36:50 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/21 10:54:40 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:05:32 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ char	**check_rgb(char **element)
 	if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255
 		|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255
 		|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
+	{
+		ft_free_split(&rgb);
 		config_error(ECOLOR, &element, 1);
+	}
 	return (rgb);
 }
