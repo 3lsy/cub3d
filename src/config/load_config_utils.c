@@ -17,16 +17,14 @@ void	check_digit(char **rgb, char **element)
 	if (!rgb[0] || !rgb[1] || !rgb[2])
 	{
 		ft_free_split(&rgb);
-		ft_free_split(&element);
-		exit_error(EMRGB);
+		config_error(EMRGB, &element, 1);
 	}
 	if ((ft_atoi(rgb[0]) == 0 && ft_strcmp(rgb[0], "0") != 0)
 		|| (ft_atoi(rgb[1]) == 0 && ft_strcmp(rgb[1], "0") != 0)
 		|| (ft_atoi(rgb[2]) == 0 && ft_strcmp(rgb[2], "0") != 0))
 	{
 		ft_free_split(&rgb);
-		ft_free_split(&element);
-		exit_error(EMRGB);
+		config_error(EMRGB, &element, 1);
 	}
 }
 

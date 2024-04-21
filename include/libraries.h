@@ -72,31 +72,31 @@
 ** Error messages
 */
 
-# define USAGE "cub3d: Usage: ./cub3d <map.cub>\n"
-# define EPERIMETER "cub3d: Unclosed map perimeter\n"
-# define EFILE "cub3d: Couldn't open file\n"
-# define EELMAP "cub3d: Empty line in map\n"
-# define EMLX "cub3d: Minilibx init error\n"
-# define EWIN "cub3d: Minilibx window error\n"
-# define EIMG "cub3d: Minilibx image error\n"
-# define ECUB "cub3d: Invalid extention for .cub file\n"
-# define EINFO "cub3d: Too much information for one element\n"
-# define EPATH "cub3d: Invalid path for xpm file\n"
-# define EDUP "cub3d: Duplicate identifier detected\n"
-# define EEXP "cub3d: Invalid texture file extention\n"
-# define EMRGB "cub3d: Missing RGB information\n"
-# define ECOLOR "cub3d: Invalid RGB set\n"
-# define EUNKNOWN "cub3d: Unkown element detected\n"
-# define EIEMAP "cub3d: Invalid element in map line\n"
-# define EMULP "cub3d: Multiple player detected\n"
-# define EWALLO "cub3d: Map must be surrunded by wall(outline)\n"
-# define EWALLI "cub3d: Map must be surrunded by wall(inner)\n"
-# define EMNLE "cub3d: Map is not the last element\n"
-# define EMMAP "cub3d: Map element missing\n"
-# define EMTEXT "cub3d: Texture element missing\n"
-# define EMCOLOR "cub3d: Color element missing\n"
-# define EMPLAYER "cub3d: Player missing\n"
-# define EXPM "cub3d: Invalid xpm file\n"
+# define USAGE "cub3d: Usage: ./cub3d <map.cub>"
+# define EPERIMETER "cub3d: Unclosed map perimeter"
+# define EFILE "cub3d: Couldn't open file"
+# define EELMAP "cub3d: Empty line in map"
+# define EMLX "cub3d: Minilibx init error"
+# define EWIN "cub3d: Minilibx window error"
+# define EIMG "cub3d: Minilibx image error"
+# define ECUB "cub3d: Invalid extension for .cub file"
+# define EINFO "cub3d: Too much information for one element"
+# define EPATH "cub3d: Invalid path for xpm file"
+# define EDUP "cub3d: Duplicate identifier detected"
+# define EEXP "cub3d: Invalid texture file extension"
+# define EMRGB "cub3d: Missing RGB information"
+# define ECOLOR "cub3d: Invalid RGB set"
+# define EUNKNOWN "cub3d: Unkown element detected"
+# define EIEMAP "cub3d: Invalid element in map line"
+# define EMULP "cub3d: Multiple players detected"
+# define EWALLO "cub3d: Map must be surrunded by wall(outline)"
+# define EWALLI "cub3d: Map must be surrunded by wall(inner)"
+# define EMNLE "cub3d: Map is not the last element"
+# define EMMAP "cub3d: Map element missing"
+# define EMTEXT "cub3d: Texture element missing"
+# define EMCOLOR "cub3d: Color element missing"
+# define EMPLAYER "cub3d: Player missing"
+# define EXPM "cub3d: Invalid xpm file"
 
 /*
 ** Keys
@@ -224,6 +224,7 @@ typedef struct s_cub3d
 	t_doubly	*llmap;
 	t_player	player;
 	t_graphics	graphics;
+	char		*line;
 }	t_cub3d;
 
 #endif

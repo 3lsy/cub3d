@@ -17,6 +17,8 @@ void	ft_destructor(t_cub3d *world)
 {
 	if (world->fd != -1)
 		close(world->fd);
+	if (world->line)
+		free(world->line);
 	map_destructor(world);
 	graphic_destructor(&world->graphics);
 }

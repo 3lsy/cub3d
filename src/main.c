@@ -18,6 +18,13 @@ void	exit_error(char *message)
 	exit(EXIT_FAILURE);
 }
 
+void	config_error(char *message, char ***element, int i)
+{
+	ft_fprintf(STDERR_FILENO, "Error\n%s: %s\n", message, (*element)[i]);
+	ft_free_split(element);
+	exit(EXIT_FAILURE);
+}
+
 int	main(int ac, char **av)
 {
 	t_cub3d	*world;

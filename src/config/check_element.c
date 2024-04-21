@@ -19,10 +19,7 @@
 void	check_texture(char **element)
 {
 	if (ft_strncmp(element[1] + ft_strlen(element[1]) - 4, ".xpm", 4) != 0)
-	{
-		ft_free_split(&element);
-		exit_error(EEXP);
-	}
+		config_error(EEXP, &element, 1);
 }
 
 t_img	*load_img(char **element, t_cub3d *world)
@@ -34,10 +31,7 @@ t_img	*load_img(char **element, t_cub3d *world)
 	img = mlx_xpm_file_to_image(world->graphics.mlx,
 			element[1], &width, &height);
 	if (!img)
-	{
-		ft_free_split(&element);
-		exit_error(EXPM);
-	}
+		config_error(EXPM, &element, 1);
 	return (img);
 }
 
@@ -66,10 +60,7 @@ void	check_mult_id(char **element, t_cub3d *word)
 		|| (ft_strcmp(id, "WE") == 0 && word->graphics.texture_w)
 		|| (ft_strcmp(id, "C") == 0 && word->graphics.ceiling_color != -1)
 		|| (ft_strcmp(id, "F") == 0 && word->graphics.floor_color != -1))
-	{
-		ft_free_split(&element);
-		exit_error(EDUP);
-	}
+		config_error(EDUP, &element, 0);
 }
 
 char	**check_rgb(char **element)
@@ -77,19 +68,12 @@ char	**check_rgb(char **element)
 	char	**rgb;
 
 	if (!element[1])
-	{
-		ft_free_split(&element);
-		exit_error(EMRGB);
-	}
+		config_error(EMRGB, &element, 0);
 	rgb = ft_split(element[1], ',');
 	check_digit(rgb, element);
 	if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255
 		|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255
 		|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
-	{
-		ft_free_split(&rgb);
-		ft_free_split(&element);
-		exit_error(ECOLOR);
-	}
+		config_error(ECOLOR, &element, 1);
 	return (rgb);
 }
