@@ -41,10 +41,12 @@ void	check_cf(char **element, t_cub3d *word)
 	ft_free_split(&rgb);
 }
 
-int	check_map_started(char *line, t_cub3d *world)
+int	check_map_started(char *trimmed_line, t_cub3d *world)
 {
-	int	i;
+	int		i;
+	char	*line;
 
+	line = trimmed_line;
 	if (world->map_h)
 		return (1);
 	i = 0;
@@ -58,13 +60,13 @@ int	check_map_started(char *line, t_cub3d *world)
 	}
 	if (i == (int)ft_strlen(line))
 	{
-		check_element_missing(world);
+		check_element_missing(trimmed_line, world);
 		return (1);
 	}
 	return (0);
 }
 
-void	check_element_missing(t_cub3d *world)
+void	check_element_missing(char *trimmed_line, t_cub3d *world)
 {
 	int	missing;
 
@@ -75,18 +77,22 @@ void	check_element_missing(t_cub3d *world)
 	if (world->graphics.ceiling_color == -1
 		|| world->graphics.floor_color == -1)
 	{
+		free(trimmed_line);
 		missing++;
 		if (missing == 2)
 			exit_error(EMBOTH);
 		exit_error(EMCOLOR);
 	}
 	else if (missing == 1)
+	{
+		free(trimmed_line);
 		exit_error(EMTEXT);
+	}
 }
 
-void	check_empty_line(char *line, t_cub3d *world, int *map_end)
+void	check_empty_line(char *trimmed_line, t_cub3d *world, int *map_end)
 {
 	if (world->map_h && !(*map_end))
 		(*map_end) = 1;
-	free(line);
+	free(trimmed_line);
 }
