@@ -1,0 +1,6 @@
+NO ./textures/north_wall/crystal_box.xpm
+SO ./textures/south_wall/crystal_imac.xpm
+WE ./textures/west_wall/crystal_sign.xpm  
+EA ./textures/east_wall/crystal.xpm
+F 110,153,15
+C 255,255,255
