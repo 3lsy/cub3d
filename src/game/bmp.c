@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:17:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/14 10:38:20 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:24:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	is_player(t_player p, int x, int y)
 	return (0);
 }
 
+// if (map[m.y / MMAP_SCALE][m.x / MMAP_SCALE].type == ' ')
+// (*bmp)[m.y][m.x] = 0x00ff00; // test for update map
 void	paint_bmp(int ***bmp, t_pair m, t_player *player, t_map **map)
 {
 	int	w;
@@ -82,7 +84,8 @@ static void	init_dimensions(t_graphics *graphics, t_cub3d *world)
 void	new_bmp(t_graphics *graphics, t_cub3d *world)
 {
 	init_dimensions(graphics, world);
-	graphics->bmp = bmp_square(graphics->mmap_w, graphics->mmap_h, 0x000000);
+	graphics->bmp = bmp_square(graphics->mmap_w, graphics->mmap_h,
+			graphics->ceiling_color);
 	paint_bmp(&graphics->bmp, (t_pair){graphics->mmap_w, graphics->mmap_h},
 		&world->player, world->map);
 	world->map[(int)world->player.y][(int)world->player.x].type = '0';

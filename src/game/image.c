@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:36:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/11 00:44:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/21 00:17:23 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	local_endian(void)
 	return (((unsigned char *)&a)[0] == 0x11);
 }
 
-static void	set_color_ptr(unsigned char *line, t_img *i,
+void	set_color_ptr(unsigned char *line, t_img *i,
 	unsigned char	*ucolor, int x)
 {
 	int				byte;
@@ -49,28 +49,14 @@ static void	set_color_ptr(unsigned char *line, t_img *i,
 	}
 }
 
-void	bmp_to_img(void *mlx, t_img *i, t_pair wh, int **bmp)
+int	get_pixel(t_img *img, int x, int y)
 {
-	int				x;
-	int				y;
-	int				color;
-	int				fixed_color;
-	unsigned char	*ptr;
+	int		color;
+	char	*dst;
 
-	y = 0;
-	while (y < wh.y)
-	{
-		ptr = (unsigned char *)i->data + y * i->size_line;
-		x = 0;
-		while (x < wh.x)
-		{
-			color = bmp[y][x];
-			fixed_color = mlx_get_color_value(mlx, color);
-			set_color_ptr(ptr, i, (unsigned char *)&fixed_color, x);
-			x++;
-		}
-		y++;
-	}
+	dst = img->data + (y * img->size_line + x * (img->bpp / 8));
+	color = *(unsigned int *)dst;
+	return (color);
 }
 
 t_img	*new_img(void *mlx, int w, int h, int **bmp)
