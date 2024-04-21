@@ -14,13 +14,13 @@
 
 void	exit_error(char *message)
 {
-	ft_fprintf(STDERR_FILENO, "Error\ncub3d: %s\n", message);
+	ft_fprintf(STDERR_FILENO, "Error\ncub3D: %s\n", message);
 	exit(EXIT_FAILURE);
 }
 
 void	config_error(char *message, char ***element, int i)
 {
-	ft_fprintf(STDERR_FILENO, "Error\ncub3d: %s: %s\n", message, (*element)[i]);
+	ft_fprintf(STDERR_FILENO, "Error\ncub3D: %s: %s\n", message, (*element)[i]);
 	ft_free_split(element);
 	exit(EXIT_FAILURE);
 }

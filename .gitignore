@@ -2,6 +2,7 @@
 .vscode
 ###Program name##
 cub3d
+cub3D
 
 mlx-test
 Makefile.gen

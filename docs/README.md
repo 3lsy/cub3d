@@ -1,4 +1,4 @@
-# cub3d
+# cub3D
 A “*realistic*” 3D graphical representation of the inside of a maze from a first-person perspective using the Ray-Casting principles. 
 
 Built in [miniLibX](https://github.com/42Paris/minilibx-linux), inspired on [Wolfenstein 3D](http://users.atw.hu/wolf3d/) which is the ancestor of games 
@@ -13,7 +13,7 @@ and Quake (Id Software, 1996), that are additional eternal milestones in the wor
   <img src = "raycasting2d.gif">
 </p>
 
-## How to build cub3d ? 🏗️
+## How to build cub3D ? 🏗️
 > [!NOTE]
 > #### Requirements
 > - Debian or Ubuntu base distro
@@ -37,7 +37,7 @@ and Quake (Id Software, 1996), that are additional eternal milestones in the wor
   
 </details>
 <details open>
-<summary><b>Compile <i>cub3d</i></b></summary
+<summary><b>Compile <i>cub3D</i></b></summary
 
   Just run `make` and let the magic happen 🪄
   ```bash
@@ -45,7 +45,7 @@ and Quake (Id Software, 1996), that are additional eternal milestones in the wor
   ```
 </details>
 
-## How to run cub3d ? 🕹️
+## How to run cub3D ? 🕹️
 
 ### Configuration files
 
@@ -140,7 +140,7 @@ C 225,30,0
 <details name="maps">
 <summary><b>Maps 🗺️</b></summary>
 
-The program `cub3d` needs a map (with the `.cub` extension) as the first argument to generate the 3D world. 
+The program `cub3D` needs a map (with the `.cub` extension) as the first argument to generate the 3D world. 
 You can choose, create or modify an existent map.
 
 ##### Map syntax

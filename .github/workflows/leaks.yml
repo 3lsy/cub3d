@@ -26,7 +26,7 @@ jobs:
             apt-get -y install valgrind xorg \
             libxext-dev zlib1g-dev libbsd-dev make clang
 
-      - name: Build cub3d
+      - name: Build cub3D
         run: make
 
       - name: Leak test
@@ -35,7 +35,7 @@ jobs:
             echo "Testing $map..."
 
             # Run Valgrind to check for memory leaks
-            valmessage=$(valgrind ./cub3d "$map" 2>&1 || true)
+            valmessage=$(valgrind ./cub3D "$map" 2>&1 || true)
 
             # Check for the "no leaks are possible" message
             leaks=$(echo "$valmessage" | grep 'no leaks are possible' || true)
