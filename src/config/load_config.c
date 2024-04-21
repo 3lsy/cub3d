@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:38:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/12 16:05:37 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 16:23:49 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	parse_config(char *file, t_cub3d *world)
 
 	map_end = 0;
 	world->fd = open(file, O_RDONLY);
-	if (world->fd == -1)
+	if (world->fd < 0)
 		exit_error(strerror(errno));
 	world->map_h = 0;
 	world->line = ft_get_next_line(world->fd);
