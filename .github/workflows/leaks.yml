@@ -31,12 +31,17 @@ jobs:
 
       - name: Leak test
         run: |
-          for map in maps/*/*.xpm; do
+          for map in maps/{valid,invalid}/*.cub; do
             echo "Testing $map..."
+
+            # Run Valgrind to check for memory leaks
             valmessage=$(valgrind ./cub3d "$map" 2>&1 || true)
+
+            # Check for the "no leaks are possible" message
             leaks=$(echo "$valmessage" | grep 'no leaks are possible' || true)
-            if [ ! -z "$leaks" ]; then
-              echo "There are no leaks for $map! ✅🔥"
+
+            if [ -n "$leaks" ]; then
+              echo "No leaks for $map! ✅🔥"
             else
               echo "Errors for $map:"
               echo "$valmessage"
