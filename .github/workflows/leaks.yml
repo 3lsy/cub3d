@@ -31,7 +31,7 @@ jobs:
 
       - name: Leak test
         run: |
-          for map in maps/{valid,invalid}/*.cub; do
+          for map in maps/{valid,invalid,macros,tester}/*.cub; do
             echo "Testing $map..."
 
             # Run Valgrind to check for memory leaks
