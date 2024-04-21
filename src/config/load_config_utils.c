@@ -71,10 +71,7 @@ void	check_element_missing(t_cub3d *world)
 	missing = 0;
 	if (!world->graphics.texture_n || !world->graphics.texture_s
 		|| !world->graphics.texture_e || !world->graphics.texture_w)
-	{
 		missing++;
-		exit_error(EMTEXT);
-	}
 	if (world->graphics.ceiling_color == -1
 		|| world->graphics.floor_color == -1)
 	{
@@ -83,6 +80,8 @@ void	check_element_missing(t_cub3d *world)
 			exit_error(EMBOTH);
 		exit_error(EMCOLOR);
 	}
+	else if (missing == 1)
+		exit_error(EMTEXT);
 }
 
 void	check_empty_line(char *line, t_cub3d *world, int *map_end)
