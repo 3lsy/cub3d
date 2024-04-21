@@ -19,7 +19,12 @@ int	exit_game(void *p _X_UNUSED)
 
 int	event_render(void *p)
 {
-	paint_mmap(p);
+	t_cub3d	*world;
+
+	world = (t_cub3d *)p;
+	paint_3d(world);
+	if (world->graphics.mmap_on)
+		paint_mmap(world);
 	return (0);
 }
 
