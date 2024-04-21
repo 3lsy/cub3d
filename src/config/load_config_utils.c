@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:28:03 by syan              #+#    #+#             */
-/*   Updated: 2024/04/21 18:44:48 by syan             ###   ########.fr       */
+/*   Updated: 2024/04/21 20:52:09 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	check_map_started(char *line, t_cub3d *world)
 	}
 	if (i == (int)ft_strlen(line))
 	{
-		check_element_missiing(line, world);
+		check_element_missing(line, world);
 		return (1);
 	}
 	return (0);
 }
 
-void	check_element_missiing(char *line, t_cub3d *world)
+void	check_element_missing(char *line, t_cub3d *world)
 {
 	if (!world->graphics.texture_n || !world->graphics.texture_s
 		|| !world->graphics.texture_e || !world->graphics.texture_w)
