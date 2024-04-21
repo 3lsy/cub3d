@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROGRAM_NAME="cub3d"
+PROGRAM_NAME="cub3D"
 
 # Get all the process IDs (PIDs) of the running program
 PIDS=$(pgrep -f "$PROGRAM_NAME")
