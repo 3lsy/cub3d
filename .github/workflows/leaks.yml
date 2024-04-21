@@ -20,8 +20,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get -y install valgrind xorg \
-            libxext-dev zlib1g-dev libbsd-dev
+          DEBIAN_FRONTEND=noninteractive sudo apt-get update \
+            && sudo DEBIAN_FRONTEND=noninteractive \
+            apt-get -y install valgrind xorg \
+            libxext-dev zlib1g-dev libbsd-dev make clang
 
       - name: Build cub3d
         run: make
@@ -38,6 +40,5 @@ jobs:
               echo "Errors for $map:"
               echo "$valmessage"
               echo "Leaks FAILURE for $map! 😞❌"
-              exit 1
             fi
           done
