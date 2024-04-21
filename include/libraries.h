@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:38:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/20 20:48:35 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/21 10:39:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,24 @@
 # define EMLX "cub3d: Minilibx init error\n"
 # define EWIN "cub3d: Minilibx window error\n"
 # define EIMG "cub3d: Minilibx image error\n"
+# define ECUB "cub3d: Invalid extention for .cub file\n"
+# define EINFO "cub3d: Too much information for one element\n"
+# define EPATH "cub3d: Invalid path for xpm file\n"
+# define EDUP "cub3d: Duplicate identifier detected\n"
+# define EEXP "cub3d: Invalid texture file extention\n"
+# define EMRGB "cub3d: Missing RGB information\n"
+# define ECOLOR "cub3d: Invalid RGB set\n"
+# define EUNKNOWN "cub3d: Unkown element detected\n"
+# define EIEMAP "cub3d: Invalid element in map line\n"
+# define EMULP "cub3d: Multiple player detected\n"
+# define EWALLO "cub3d: Map must be surrunded by wall(outline)\n"
+# define EWALLI "cub3d: Map must be surrunded by wall(inner)\n"
+# define EMNLE "cub3d: Map is not the last element\n"
+# define EMMAP "cub3d: Map element missing\n"
+# define EMTEXT "cub3d: Texture element missing\n"
+# define EMCOLOR "cub3d: Color element missing\n"
+# define EMPLAYER "cub3d: Player missing\n"
+# define EXPM "cub3d: Invalid xpm file\n"
 
 /*
 ** Keys

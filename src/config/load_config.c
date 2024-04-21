@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syan <syan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:38:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/09 17:42:21 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:05:37 by syan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,64 @@
 ///     The map is loaded in the linked list llmap.
 int	load_config(char *file, t_cub3d *world)
 {
-	// Verify ".cub" extension
+	if (ft_strncmp(file + ft_strlen(file) - 4, ".cub", 4) != 0)
+		exit_error(ECUB);
 	parse_config(file, world);
-	translate_map(world);
-	if (valid_perimeter(world->map) == EXIT_FAILURE)
-		exit_error(EPERIMETER);
+	translate_map(world->llmap, world);
+	valid_perimeter(world);
 	return (EXIT_SUCCESS);
 }
 
 // unknown key, double keys, an invalid path,
 // invalid color, invalid map, invalid texture
-int	parse_element(char **element, t_cub3d *word)
+void	parse_element(char **element, t_cub3d *word)
 {
-	// Check if the first element is:
-	// NO, SO, WE, EA, F, C
-	// Check if the texture is valid
-	// or Check if the color is valid [0-255,0-255,0-255]
-	// word->graphics.ceiling_color = ft_rgb_to_int(r, g, b);
-	// On error, call ft_free_split(element) and exit_error();
-	// On success, save the element in the structure
+	char	*id;
+
+	if (element)
+	{
+		if (element[2])
+			exit_error(EINFO);
+		id = element[0];
+		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0
+			|| ft_strcmp(id, "WE") == 0 || ft_strcmp(id, "EA") == 0)
+			check_nsew(element, word);
+		else if (ft_strcmp(id, "C") == 0 || ft_strcmp(id, "F") == 0)
+			check_cf(element, word);
+		else
+		{
+			ft_free_split(&element);
+			exit_error(EUNKNOWN);
+		}
+	}
 }
 
-int	parse_map(char *line, t_cub3d *world)
+void	parse_map(char *line, t_cub3d *world)
 {
+	int	i;
 	int	size;
 
 	size = ft_strlen(line);
-	if (size == 0)
-		exit_error(EELMAP);
 	if (size > world->map_w)
 		world->map_w = size;
-	// Check if the line is a valid map line
-	// On error, exit_error();
-	// On success, save the line in the map
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
+			exit_error(EIEMAP);
+		if (line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W')
+		{
+			if (world->player.x != -1 || world->player.y != -1)
+				exit_error(EMULP);
+			world->player.x = i;
+			world->player.y = world->map_h;
+		}
+		i++;
+	}
 	llmap_append(line, world);
 	world->map_h++;
-}
-
-void	check_map_started(char *line, t_cub3d *world)
-{
-	if (world->map_h)
-		return ;
-	// Check if the line is the start of the map
-	// If it is, world->map_h++;
 }
 
 /*
@@ -69,19 +84,32 @@ void	check_map_started(char *line, t_cub3d *world)
 */
 /// @brief Analyze the line and check if it's an element or a map
 /// @param line The line to analyze
-void	analyze_line(char *line, t_cub3d *world)
+void	analyze_line(char *line, t_cub3d *world, int *map_end)
 {
 	char	**element;
+	char	*trimmed_line;
 
-	check_map_started(line, world);
-	if (!world->map_h)
+	trimmed_line = line;
+	trimmed_line = ft_strtrim(line, " ");
+	if (ft_strlen(trimmed_line) == 0)
 	{
-		element = ft_split(line, ' ');
+		if (world->map_h && !(*map_end))
+			(*map_end) = 1;
+		free(trimmed_line);
+		return ;
+	}
+	if (!check_map_started(trimmed_line, world))
+	{
+		element = ft_split(trimmed_line, ' ');
 		parse_element(element, world);
-		ft_free_split(element);
+		ft_free_split(&element);
 	}
 	else
+	{
+		if (*map_end)
+			exit_error(EMNLE);
 		parse_map(line, world);
+	}
 }
 
 /*
@@ -96,7 +124,9 @@ void	analyze_line(char *line, t_cub3d *world)
 void	parse_config(char *file, t_cub3d *world)
 {
 	char	*line;
+	int		map_end;
 
+	map_end = 0;
 	world->fd = open(file, O_RDONLY);
 	if (world->fd == -1)
 		exit_error(strerror(errno));
@@ -106,11 +136,13 @@ void	parse_config(char *file, t_cub3d *world)
 		exit_error(strerror(errno));
 	while (line)
 	{
-		analyze_line(line, world);
+		analyze_line(line, world, &map_end);
 		line = ft_get_next_line(world->fd);
-		if (!line)
-			exit_error(strerror(errno));
 	}
+	if (!world->map_h)
+		exit_error(EMMAP);
+	if (world->player.x == -1 && world->player.y == -1)
+		exit_error(EMPLAYER);
 	close(world->fd);
 	world->fd = -1;
 }

@@ -1,0 +1,21 @@
+NO ./textures/north_wall/forbidden_mario_cube.xpm
+SO ./textures/north_wall/mario_cube.xpm
+WE ./textures/north_wall/mario_cube.xpm  
+EA ./textures/north_wall/mario_cube.xpm
+
+F 20,20,20
+C 200,200,200
+
+11111
+10001
+10S01
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111

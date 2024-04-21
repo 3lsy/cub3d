@@ -21,6 +21,7 @@
 
 void	free_bmp(int ***bmp, int h);
 void	new_bmp(t_graphics *graphics, t_cub3d *world);
+void	llmap_append(char *line, t_cub3d *world);
 
 /*
 ** Destructors
