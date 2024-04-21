@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:38:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/21 15:06:06 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:23:49 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void	analyze_line(char *line, t_cub3d *world, int *map_end)
 
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
+	{
+		free(line);
 		exit_error(strerror(errno));
+	}
 	if (ft_strlen(trimmed_line) == 0)
 	{
 		if (world->map_h && !(*map_end))
@@ -140,7 +143,7 @@ void	parse_config(char *file, t_cub3d *world)
 	while (line)
 	{
 		analyze_line(line, world, &map_end);
-		free(line);/////
+		free(line);
 		line = ft_get_next_line(world->fd);
 	}
 	if (!world->map_h)
