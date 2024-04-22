@@ -58,7 +58,8 @@ void	render(t_cub3d *world)
 		world->graphics.mmap_h}, world->player, world);
 	raycasting(world);
 	paint_3d(world);
-	if (world->graphics.mmap_on)
+	if (world->graphics.mmap_on && world->graphics.mmap_h < W_HEIGHT
+		&& world->graphics.mmap_w < W_WIDTH)
 		paint_mmap(world);
 }
 

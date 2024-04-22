@@ -23,7 +23,8 @@ int	event_render(void *p)
 
 	world = (t_cub3d *)p;
 	paint_3d(world);
-	if (world->graphics.mmap_on)
+	if (world->graphics.mmap_on && world->graphics.mmap_h < W_HEIGHT
+		&& world->graphics.mmap_w < W_WIDTH)
 		paint_mmap(world);
 	return (0);
 }

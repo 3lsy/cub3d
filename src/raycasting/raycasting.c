@@ -55,6 +55,8 @@ void	cast_ray(t_cub3d *world, t_player *p)
 
 void	paint_ray(t_cub3d *world, double vray[2])
 {
+	if (world->graphics.mmap_h >= W_HEIGHT || world->graphics.mmap_w >= W_WIDTH)
+		return ;
 	world->graphics.bmp[(int)vray[1]][(int)vray[0]] = FOV_COLOR;
 	world->graphics.bmp[(int)vray[1] + 1][(int)vray[0]] = FOV_COLOR;
 	world->graphics.bmp[(int)vray[1] - 1][(int)vray[0]] = FOV_COLOR;
