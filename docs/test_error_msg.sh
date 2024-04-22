@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-for map in maps/macros/*.cub; do
+for map in maps/{macros,invalid,tester}/*.cub; do
     echo -e "\n- Testing $map..."
 
     message=$(./cub3D "$map" 2>&1 || true)

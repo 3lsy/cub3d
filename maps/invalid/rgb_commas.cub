@@ -1,10 +1,11 @@
-NO ./textures/north_wall/crystal_box.xpm path.xpm
-SO ./textures/south_wall/crystal_imac.xpm
-WE ./textures/west_wall/crystal_sign.xpm  
-EA ./textures/east_wall/crystal.xpm
+WE ./textures/east_wall/cake.xpm  
+EA ./textures/east_wall/cake.xpm
+NO ./textures/east_wall/cake.xpm
+SO ./textures/east_wall/cake.xpm
 
-F 220,100,0
-C 225,30,0
+
+F 210,159,105
+C 207,226,243,,,
 
         1111111111111111111111111
         1000000000110000000000001

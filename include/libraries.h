@@ -83,7 +83,10 @@
 # define EDUP "Duplicated identifier detected"
 # define EEXP "Invalid texture file extension"
 # define EMRGB "Missing RGB information"
+# define ERGBF "Invalid RGB format"
 # define ECOLOR "Invalid RGB set"
+# define ENOTNUM "RGB values must numbers between 0 and 255"
+# define EMCOMMAS "Invalid number of commas"
 # define EUNKNOWN "Unknown element detected"
 # define EIEMAP "Invalid element in map line"
 # define EMULP "Multiple players detected 🎮 🎮"
@@ -95,6 +98,7 @@
 # define EMBOTH "Missing both color and texture elements 🎨"
 # define EMPLAYER "Missing player on the map"
 # define EXPM "Invalid xpm file"
+# define EEMPTY "File is empty"
 
 /*
 ** Keys

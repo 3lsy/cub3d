@@ -34,9 +34,10 @@ void	parse_element(char **element, t_cub3d *word)
 
 	if (element)
 	{
-		if (element[2] && ft_strlen(element[2]) > 0)
-			config_error(EINFO, &element, 2);
 		id = element[0];
+		if (ft_strcmp(id, "C") != 0 && ft_strcmp(id, "F") != 0
+			&& element[1] && element[2] && ft_strlen(element[2]) > 0)
+			config_error(EINFO, &element, 2);
 		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0
 			|| ft_strcmp(id, "WE") == 0 || ft_strcmp(id, "EA") == 0)
 			check_nsew(element, word);
@@ -130,7 +131,7 @@ void	parse_config(char *file, t_cub3d *world)
 	world->map_h = 0;
 	world->line = ft_get_next_line(world->fd);
 	if (!world->line)
-		exit_error(strerror(errno));
+		exit_error(EEMPTY);
 	while (world->line)
 	{
 		analyze_line(world->line, world, &map_end);
