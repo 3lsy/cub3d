@@ -34,9 +34,10 @@ void	parse_element(char **element, t_cub3d *word)
 
 	if (element)
 	{
-		if (element[2] && ft_strlen(element[2]) > 0)
-			config_error(EINFO, &element, 2);
 		id = element[0];
+		if (ft_strcmp(id, "C") != 0 && ft_strcmp(id, "F") != 0
+			&& element[2] && ft_strlen(element[2]) > 0)
+			config_error(EINFO, &element, 2);
 		if (ft_strcmp(id, "NO") == 0 || ft_strcmp(id, "SO") == 0
 			|| ft_strcmp(id, "WE") == 0 || ft_strcmp(id, "EA") == 0)
 			check_nsew(element, word);

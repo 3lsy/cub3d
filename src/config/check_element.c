@@ -62,21 +62,3 @@ void	check_mult_id(char **element, t_cub3d *word)
 		|| (ft_strcmp(id, "F") == 0 && word->graphics.floor_color != -1))
 		config_error(EDUP, &element, 0);
 }
-
-char	**check_rgb(char **element)
-{
-	char	**rgb;
-
-	if (!element[1])
-		config_error(EMRGB, &element, 0);
-	rgb = ft_split(element[1], ',');
-	check_digit(rgb, element);
-	if (ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[0]) > 255
-		|| ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[1]) > 255
-		|| ft_atoi(rgb[2]) < 0 || ft_atoi(rgb[2]) > 255)
-	{
-		ft_free_split(&rgb);
-		config_error(ECOLOR, &element, 1);
-	}
-	return (rgb);
-}

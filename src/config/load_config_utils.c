@@ -12,33 +12,19 @@
 
 #include "cub3d.h"
 
-void	check_digit(char **rgb, char **element)
-{
-	if (!rgb[0] || !rgb[1] || !rgb[2])
-	{
-		ft_free_split(&rgb);
-		config_error(EMRGB, &element, 1);
-	}
-	if (!ft_isnum(rgb[0]) || !ft_isnum(rgb[1]) || !ft_isnum(rgb[2]))
-	{
-		ft_free_split(&rgb);
-		config_error(ECOLOR, &element, 1);
-	}
-}
-
 void	check_cf(char **element, t_cub3d *word)
 {
-	char	**rgb;
+	int	rgb[3];
 
+	rgb[0] = -1;
+	rgb[1] = -1;
+	rgb[2] = -1;
 	check_mult_id(element, word);
-	rgb = check_rgb(element);
+	check_rgb(element, rgb);
 	if (ft_strcmp(element[0], "C") == 0)
-		word->graphics.ceiling_color = ft_rgb_to_int(ft_atoi(rgb[0]),
-				ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+		word->graphics.ceiling_color = ft_rgb_to_int(rgb[0], rgb[1], rgb[2]);
 	else if (ft_strcmp(element[0], "F") == 0)
-		word->graphics.floor_color = ft_rgb_to_int(ft_atoi(rgb[0]),
-				ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-	ft_free_split(&rgb);
+		word->graphics.floor_color = ft_rgb_to_int(rgb[0], rgb[1], rgb[2]);
 }
 
 int	check_map_started(char *trimmed_line, t_cub3d *world)
