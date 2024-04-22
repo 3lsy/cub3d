@@ -98,6 +98,7 @@
 # define EMBOTH "Missing both color and texture elements 🎨"
 # define EMPLAYER "Missing player on the map"
 # define EXPM "Invalid xpm file"
+# define EEMPTY "File is empty"
 
 /*
 ** Keys
