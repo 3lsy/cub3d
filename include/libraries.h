@@ -57,7 +57,7 @@
 
 # define FOV 60
 # define ANGLE_UNIT 0.0005
-# define MAX_DEPTH 20
+# define MAX_DEPTH 35
 # define FOV_COLOR 0x00FF00
 # define X_AXIS 0
 # define Y_AXIS 1

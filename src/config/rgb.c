@@ -39,7 +39,6 @@ void	extract_color(char *color, int rgb[3], int *xi, char ***element)
 		if (*xi > 2)
 			throw_rgb_error(ERGBF, &c, element);
 		rgb[(*xi)++] = num;
-		printf("rgb[%d] = %d\n", *xi - 1, rgb[*xi - 1]);
 	}
 	ft_free_split(&c);
 }

@@ -32,10 +32,8 @@ void	translate_map(t_doubly *llmap, t_cub3d *world)
 			world->map[i][j].x = j;
 			world->map[i][j].y = i;
 			world->map[i][j].visited = 0;
-			ft_printf("%c ", world->map[i][j].type);
 			j++;
 		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
 		llmap = llmap->next;
 		i++;
 	}
