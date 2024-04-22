@@ -30,5 +30,7 @@ void	check_element_missing(char *trimmed_line, t_cub3d *world);
 void	check_empty_line(char *trimmed_line, t_cub3d *world, int *map_end);
 t_img	*load_img(char **element, t_cub3d *world);
 void	check_rgb(char **element, int rgb[3]);
+int		check_format(char **element);
+void	extract_color(char *color, int rgb[3], int *xi, char ***element);
 
 #endif

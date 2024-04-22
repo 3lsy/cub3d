@@ -82,3 +82,27 @@ void	check_empty_line(char *trimmed_line, t_cub3d *world, int *map_end)
 		(*map_end) = 1;
 	free(trimmed_line);
 }
+
+void	check_rgb(char **element, int rgb[3])
+{
+	int	i;
+	int	xi;
+	int	comma;
+
+	if (!element[1])
+		config_error(EMRGB, &element, 0);
+	comma = check_format(element);
+	if (comma != 2)
+		config_error(EMCOMMAS, &element, 0);
+	xi = 0;
+	i = 0;
+	comma = 0;
+	while (element[++i])
+	{
+		if (ft_strcmp(element[i], ",") == 0)
+			continue ;
+		extract_color(element[i], rgb, &xi, &element);
+	}
+	if (xi != 3)
+		config_error(EMRGB, &element, 0);
+}

@@ -39,32 +39,59 @@ void	extract_color(char *color, int rgb[3], int *xi, char ***element)
 		if (*xi > 2)
 			throw_rgb_error(ERGBF, &c, element);
 		rgb[(*xi)++] = num;
+		printf("rgb[%d] = %d\n", *xi - 1, rgb[*xi - 1]);
 	}
 	ft_free_split(&c);
 }
 
-void	check_rgb(char **element, int rgb[3])
+void	check_number(char **element, int i, int *j, int *rgb)
+{
+	int	c_size;
+
+	c_size = 0;
+	if (element[i][*j] != ',')
+	{
+		(*rgb)++;
+		while (ft_isdigit(element[i][++(*j)]))
+			c_size++;
+		if (c_size > 3)
+			config_error(ENOTNUM, &element, 0);
+	}
+}
+
+void	check_comma(char **element, t_pair ij, int rgb, int *comma)
+{
+	if (element[ij.x][ij.y] == ',')
+	{
+		if ((*comma == 0 && rgb != 1) || (*comma == 1 && rgb != 2)
+			|| (*comma == 2 && rgb != 3))
+			config_error(ERGBF, &element, 0);
+		(*comma)++;
+	}
+}
+
+int	check_format(char **element)
 {
 	int	i;
-	int	xi;
+	int	j;
 	int	comma;
+	int	rgb;
 
-	if (!element[1])
-		config_error(EMRGB, &element, 0);
-	xi = 0;
 	i = 0;
 	comma = 0;
+	rgb = 0;
 	while (element[++i])
 	{
-		comma += ft_strchr_len(element[i], ',');
-		if (comma > 2)
-			config_error(EMCOMMAS, &element, 0);
-		if (ft_strcmp(element[i], ",") == 0)
-			continue ;
-		extract_color(element[i], rgb, &xi, &element);
+		j = -1;
+		while (element[i][++j])
+		{
+			if (element[i][j] != ',' && !ft_isdigit(element[i][j]))
+				config_error(ERGBF, &element, 0);
+			check_number(element, i, &j, &rgb);
+			if (!element[i][j])
+				break ;
+			check_comma(element, (t_pair){i, j}, rgb, &comma);
+		}
 	}
-	if (xi != 3)
-		config_error(EMRGB, &element, 0);
-	if (comma != 2)
-		config_error(EMCOMMAS, &element, 0);
+	return (comma);
 }
