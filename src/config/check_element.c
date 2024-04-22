@@ -62,14 +62,3 @@ void	check_mult_id(char **element, t_cub3d *word)
 		|| (ft_strcmp(id, "F") == 0 && word->graphics.floor_color != -1))
 		config_error(EDUP, &element, 0);
 }
-
-int	is_empty_file(int fd)
-{
-	char	buffer[1];
-	ssize_t	bytes_read;
-
-	bytes_read = read(fd, buffer, sizeof(buffer));
-	if (bytes_read == -1)
-		exit_error(strerror(errno));
-	return (bytes_read == 0);
-}

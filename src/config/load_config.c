@@ -128,12 +128,10 @@ void	parse_config(char *file, t_cub3d *world)
 	world->fd = open(file, O_RDONLY);
 	if (world->fd < 0)
 		exit_error(strerror(errno));
-	if (is_empty_file(world->fd))
-		exit_error(EEMPTY);
 	world->map_h = 0;
 	world->line = ft_get_next_line(world->fd);
 	if (!world->line)
-		exit_error(strerror(errno));
+		exit_error(EEMPTY);
 	while (world->line)
 	{
 		analyze_line(world->line, world, &map_end);
