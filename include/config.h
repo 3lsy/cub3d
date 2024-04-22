@@ -16,7 +16,7 @@
 # include "libraries.h"
 
 int		load_config(char *file, t_cub3d *world);
-int	    check_map_started(char *trimmed_line, t_cub3d *world);
+int		check_map_started(char *trimmed_line, t_cub3d *world);
 void	translate_map(t_doubly *llmap, t_cub3d *world);
 void	parse_config(char *file, t_cub3d *world);
 void	check_nsew(char **element, t_cub3d *word);
@@ -29,6 +29,6 @@ void	valid_perimeter(t_cub3d *world);
 void	check_element_missing(char *trimmed_line, t_cub3d *world);
 void	check_empty_line(char *trimmed_line, t_cub3d *world, int *map_end);
 t_img	*load_img(char **element, t_cub3d *world);
-void    check_rgb(char **element, int rgb[3]);
+void	check_rgb(char **element, int rgb[3]);
 
 #endif
