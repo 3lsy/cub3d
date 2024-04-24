@@ -1,6 +1,10 @@
 # cub3D
 A “*realistic*” 3D graphical representation of the inside of a maze from a first-person perspective using the Ray-Casting principles. 
 
+<p align="center">
+  <img src = "cub3D.gif">
+</p>
+
 Built in [miniLibX](https://github.com/42Paris/minilibx-linux), inspired on [Wolfenstein 3D](http://users.atw.hu/wolf3d/) which is the ancestor of games 
 like Doom (Id Software, 1993), Doom II (Id Software, 1994), Duke Nukem 3D (3D Realm, 1996)
 and Quake (Id Software, 1996), that are additional eternal milestones in the world of video games.
